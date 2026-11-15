@@ -1,0 +1,13 @@
+.hud-screen .energy { margin-top: 16px; }
+.hud-screen .energy h3 { margin: 0 0 6px; }
+.hud-screen .energy-verdict { margin: 0 0 8px; font-size: 18px; font-weight: 300; color: var(--fg); }
+.hud-screen .energy-verdict.energy-bad { color: var(--red); }
+.hud-screen .energy-chart { display: block; width: 100%; height: 110px; border: 1px solid var(--line); }
+.hud-screen .energy-night { fill: var(--line); opacity: 0.6; }
+.hud-screen .energy-soc { fill: none; stroke: var(--fg); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.hud-screen .energy-empty { stroke: var(--red); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.hud-screen .energy-axis { display: flex; justify-content: space-between; gap: 8px; }
+.hud-screen .energy-inputs { display: flex; flex-wrap: wrap; align-items: end; gap: 8px 14px; margin-top: 10px; }
+.hud-screen .energy-inputs label { display: flex; flex-direction: column; gap: 2px; }
+.hud-screen .energy-inputs input { width: 9em; }
+.hud-screen .energy-inputs input, .hud-screen .energy-inputs select { background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 2px; padding: 2px 4px; font: inherit; }

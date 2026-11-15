@@ -1,0 +1,15 @@
+/* LRO image card (#217): image with the model shadow overlay and an opacity slider. */
+.hud-screen.validation .lroc-card { grid-column:1 / -1; max-width:760px; }
+.hud-screen.validation .lroc-view { position:relative; margin:0 0 6px; background:#000; }
+.hud-screen.validation .lroc-view img { display:block; width:100%; height:auto; }
+.hud-screen.validation .lroc-view .lroc-mask { position:absolute; inset:0; height:100%; image-rendering:pixelated; }
+.hud-screen.validation .lroc-slider { display:flex; align-items:center; gap:8px; font-family:var(--h-mono); font-size:11px; color:var(--muted); }
+.hud-screen.validation .lroc-slider input { flex:1; }
+.hud-screen.validation .lroc-legend { margin:4px 0 8px; font-family:var(--h-mono); font-size:11px; color:var(--muted); }
+.hud-screen.validation .lroc-both { color:rgb(60,140,255); }
+.hud-screen.validation .lroc-model { color:rgb(255,60,60); }
+.hud-screen.validation .lroc-image { color:rgb(255,210,0); }
+.hud-screen.validation .lroc-out { color:rgb(150,150,150); }
+.hud-screen.validation .lroc-split { font-family:var(--h-mono); font-size:10px; color:var(--muted); font-weight:400; margin-left:6px; text-transform:uppercase; }
+.hud-screen.validation .lroc-methods { display:flex; flex-wrap:wrap; gap:12px; margin:0 0 6px; font-family:var(--h-mono); font-size:11px; color:var(--muted); }
+.hud-screen.validation .lroc-methods label { display:flex; align-items:center; gap:4px; cursor:pointer; }

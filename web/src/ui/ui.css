@@ -1,0 +1,88 @@
+/* #161 shared controls: Select (button + listbox) and the sliding selection mark.
+   Colours, radius and type come from styles.css tokens; timing from --ui-* (motion/motion.css). */
+
+/* ---------- Select ---------- */
+.ui-select { text-transform:none; letter-spacing:normal; display:inline-flex; align-items:center; justify-content:space-between; gap:10px; min-width:0; max-width:100%;
+  background:var(--panel); color:var(--fg); border:1px solid var(--line-strong); border-radius:var(--radius);
+  padding:3px 8px 3px 8px; font-family:var(--font-mono); font-size:12px; line-height:1.45; text-align:left; cursor:pointer;
+  transition:border-color var(--ui-menu) var(--ui-ease), color var(--ui-menu) var(--ui-ease); }
+.ui-select:hover:not(:disabled), .ui-select[aria-expanded="true"] { border-color:var(--fg); color:var(--accent); }
+.ui-select:disabled { opacity:.4; cursor:default; }
+.ui-select-value { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ui-select-chev { flex:none; color:var(--muted); transition:transform var(--ui-menu) var(--ui-ease); }
+.ui-select[aria-expanded="true"] .ui-select-chev { transform:rotate(180deg); color:var(--fg); }
+
+/* The popover lives on <body> (portal), over every panel and the rail. */
+.ui-listbox { position:fixed; z-index:1000; overflow-y:auto; overscroll-behavior:contain; padding:4px 0;
+  background:var(--panel-2); border:1px solid var(--line-strong); border-radius:var(--radius);
+  color:var(--fg); font-family:var(--font-mono); font-size:12px; line-height:1.45;
+  transform-origin:50% 0; animation:ui-menu-in var(--ui-menu) var(--ui-ease); }
+.ui-listbox.is-above { transform-origin:50% 100%; animation-name:ui-menu-in-above; }
+.ui-listbox.is-closing { pointer-events:none; opacity:0; transition:opacity var(--ui-menu) var(--ui-ease); }
+.ui-listbox ul { position:relative; list-style:none; margin:0; padding:0; }
+.ui-listbox li { position:relative; padding:5px 12px 5px 14px; white-space:nowrap; cursor:pointer; color:var(--muted);
+  transition:color var(--ui-menu) var(--ui-ease); }
+.ui-listbox li.is-active { color:var(--accent); }
+.ui-listbox li[aria-selected="true"] { color:var(--fg); }
+.ui-listbox li[aria-selected="true"]::before { content:""; position:absolute; left:5px; top:50%; width:4px; height:4px; margin-top:-2px; background:var(--active); }
+.ui-listbox li[aria-disabled="true"] { opacity:.4; cursor:default; }
+/* The active-option highlight: one block that slides between options. */
+.ui-listbox-hl { position:absolute; left:0; right:0; top:0; height:0; background:var(--hover); pointer-events:none; opacity:0;
+  transition:transform var(--ui-menu) var(--ui-ease), opacity var(--ui-menu) var(--ui-ease); }
+.ui-listbox-hl[data-on="1"] { opacity:1; }
+@keyframes ui-menu-in { from { opacity:0; transform:translateY(-4px) scaleY(.96); } }
+@keyframes ui-menu-in-above { from { opacity:0; transform:translateY(4px) scaleY(.96); } }
+
+/* ---------- Sliding selection mark ---------- */
+/* :where() keeps specificity 0: a host that sets its own position keeps it. */
+:where(:has(> .ui-slide)) { position:relative; }
+:where(:has(> .ui-slide) > :not(.ui-slide)) { position:relative; z-index:1; }
+.ui-slide { position:absolute; left:0; top:0; z-index:0; pointer-events:none; opacity:0; transform-origin:0 0;
+  background:var(--active-soft);
+  transition:transform var(--ui-slide) var(--ui-ease), opacity var(--ui-slide) var(--ui-ease); }
+/* Row: the mark scales in width; the 2 px bar at the bottom keeps its height. */
+.ui-slide-x { width:100px; box-shadow:inset 0 -2px 0 var(--active); }
+/* Column (rail): the mark scales in height; the 2 px bar on the left keeps its width. */
+.ui-slide-y { height:100px; box-shadow:inset 2px 0 0 var(--active); }
+.ui-slide[data-on="1"] { opacity:1; }
+
+/* Segmented: one frame, no borders between the options; the mark shows the choice. */
+.ui-seg { display:inline-flex; align-items:stretch; border:1px solid var(--line-strong); border-radius:var(--radius); }
+.ui-seg > button { border:0; border-radius:0; padding:4px 10px; color:var(--muted); background:none;
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  transition:color var(--ui-slide) var(--ui-ease); }
+.ui-seg > button:hover:not(:disabled) { color:var(--fg); }
+.ui-seg > button[aria-pressed="true"] { color:var(--accent); }
+
+/* ---------- Groups that carry a SlideMark ----------
+   The mark shows the choice, so the pressed button drops its own static frame (it would jump while the mark slides).
+   Each rule outranks the group's own pressed rule by the :has() part. */
+.rail:has(> .ui-slide) > .rail-btn.is-active::before { background:transparent; }
+.route-modes:has(> .ui-slide) > button[aria-pressed="true"],
+.layers-grid:has(> .ui-slide) > button[aria-pressed="true"],
+.hud-screen .hud-seg:has(> .ui-slide) > button[aria-pressed="true"] { border-color:transparent; box-shadow:none; }
+.sch-zoom:has(> .ui-slide) > button[aria-pressed="true"] { background:none; box-shadow:none; }
+.hud-zoom:has(> .ui-slide) > button[aria-pressed="true"]::before,
+.hud-zoom:has(> .ui-slide) > button[aria-pressed="true"]::after { content:none; }
+:where(.route-modes, .layers-grid, .hud-seg, .sch-zoom, .hud-zoom) > button { transition:color var(--ui-slide) var(--ui-ease), border-color var(--ui-slide) var(--ui-ease); }
+
+/* ---------- Panel and sheet entry: one timing for the whole shell ----------
+   The keyframes stay in their own files (opacity + translate only); .app raises specificity over them. */
+.app :is(.layer, .sched-dock) { animation-duration:var(--ui-sheet); animation-timing-function:var(--ui-ease); }
+.app :is(.lpanel, .place-card, .layers-pop, .dp) { animation-duration:var(--ui-slide); animation-timing-function:var(--ui-ease); }
+
+
+/* #322: the "?" mark of Info; its popover sits in the top layer at the mark (Info.tsx places it). */
+.info { display:inline-flex; vertical-align:1px; margin-left:6px; }
+.info-mark { width:15px; height:15px; padding:0; display:inline-grid; place-items:center; border:1px solid var(--line-strong, var(--line)); border-radius:50%; background:none; color:var(--muted); font:500 9.5px/1 var(--font-mono); letter-spacing:0; text-transform:none; cursor:help; transition:color .15s, border-color .15s; }
+.info-mark:hover, .info-mark:focus-visible, .info-mark[aria-expanded="true"] { color:var(--fg); border-color:var(--fg); }
+.info-mark:focus-visible { outline:1px solid var(--fg); outline-offset:2px; }
+/* WCAG 2.5.8: a 25 px hit area around the 15 px mark. */
+.info-mark { position:relative; }
+.info-mark::before { content:""; position:absolute; inset:-5px; border-radius:50%; }
+.info-pop { position:fixed; inset:auto; margin:0; padding:10px 12px; max-height:min(60vh, 420px); overflow:auto; background:var(--panel); border:1px solid var(--line-strong, var(--line)); color:var(--fg); font:400 12px/1.5 var(--font-ui); letter-spacing:0; text-transform:none; text-align:left; white-space:normal; box-shadow:0 8px 24px rgba(0,0,0,.45); }
+.info-pop:not(:popover-open) { display:none; }
+.info-pop p { margin:0 0 6px; } .info-pop p:last-child { margin:0; }
+.info-pop a { color:inherit; }
+/* A tile's "?" top right; the tile is the containing block. In the DOM the mark comes last, after the values. */
+.info.is-corner { position:absolute; top:9px; right:10px; margin:0; }

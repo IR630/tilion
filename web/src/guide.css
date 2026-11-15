@@ -1,0 +1,18 @@
+/* #197: bottom left, beside the rail: the place card and the side panels own the right edge. */
+.guide { position:absolute; z-index:30; left:calc(var(--rail-w) + 12px); bottom:calc(var(--dock-h) + 12px); width:min(300px, calc(100% - 32px)); max-height:50vh; overflow:auto; padding:22px 24px 20px; border:1px solid var(--line-strong); border-radius:0; background-color:var(--panel); box-shadow:none; }
+.guide-count { font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; color:var(--muted); }
+.guide-count::before { content:"STEP "; }
+.guide h2 { margin:8px 0; font-size:20px; font-weight:300; }
+.guide p { margin:0 0 14px; color:var(--fg); }
+.guide-actions { display:flex; gap:8px; }
+.guide-actions button, .guide-open { min-height:44px; padding:6px 14px; border:1px solid var(--line-strong); border-radius:0; background:transparent; color:var(--fg); cursor:pointer; font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; }
+.guide-actions button:last-child { border-color:var(--blue); color:var(--accent); }
+.guide-actions button:disabled { opacity:.4; cursor:default; }
+.guide-open { min-height:30px; padding:4px 10px; white-space:nowrap; color:var(--muted); }
+.guide-actions button:hover:not(:disabled), .guide-open:hover { border-color:var(--fg); color:var(--accent); }
+@media (max-width:760px) { .guide { top:8px; left:8px; right:8px; bottom:auto; width:auto; max-height:34vh; padding:14px 16px; } }
+.guide-progress { height:2px; margin:0 0 12px; background:var(--line); }
+.guide-progress span { display:block; height:100%; background:var(--accent); transform-origin:left; animation:guide-fill linear forwards; }
+.guide-paused { margin:10px 0 0; font-family:var(--font-mono); font-size:11px; color:var(--muted); }
+@keyframes guide-fill { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .guide-progress span { animation:none; transform:none; } }

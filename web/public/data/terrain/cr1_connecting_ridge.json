@@ -1,0 +1,16 @@
+{
+ "siteId": "cr1_connecting_ridge",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.05055667380299061,
+ "offsetM": 313.7924094455084,
+ "minM": -1329.2994891516864,
+ "maxM": 1956.8843080427032,
+ "siteHeightM": 1956.6246723564109,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar80"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

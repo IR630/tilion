@@ -1,0 +1,5 @@
+.station-panel { margin: 12px 0; padding: 12px; border: 1px solid var(--line, #526277); border-radius: 8px; }
+.station-panel h3 { margin: 0 0 8px; }
+.station-panel p { margin: 8px 0; }
+.station-panel table { width: 100%; text-align: left; }
+.station-panel th, .station-panel td { padding: 3px 6px 3px 0; }

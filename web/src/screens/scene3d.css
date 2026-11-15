@@ -1,0 +1,31 @@
+/* Globe and 3D terrain (#95): the canvas in a bracket frame, a mono legend in its corner,
+   readouts under it, one control bar. ".hud-screen …" wins over the older ".terrain3d-…" rules. */
+.hud-screen .scene3d-frame { padding:10px; }
+.hud-screen .terrain3d-view { position:relative; }
+.hud-screen .terrain3d-view canvas { display:block; width:100%; height:min(62vh, 560px); border:0; border-radius:0; background:var(--bg); }
+.hud-screen .terrain3d-legend { position:absolute; top:10px; left:12px; margin:0; padding:0; list-style:none; background:none; border-radius:0; pointer-events:none; font-family:var(--h-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+.hud-screen .terrain3d-legend li { display:flex; align-items:center; gap:8px; margin:0 0 4px; color:var(--muted); }
+.hud-screen .terrain3d-legend li::before { content:""; display:inline-block; width:16px; height:0; border-top:2px solid var(--fg); }
+.hud-screen .terrain3d-legend .terrain3d-sun::before { border-top-color:var(--sun); }
+.hud-screen .terrain3d-legend .terrain3d-earth::before { border-top:1px dashed var(--earth); }
+.hud-screen .terrain3d-legend .terrain3d-site::before { width:7px; height:7px; border:1px solid var(--h-red); margin:0 4px; }
+.hud-screen .terrain3d-legend .terrain3d-dot::before { width:3px; height:3px; border:0; border-radius:50%; background:var(--fg); margin:0 6px; }
+.hud-screen .scene3d-status, .hud-screen .scene3d-selected { margin:8px 2px 0; font-family:var(--h-mono); font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums; letter-spacing:.03em; }
+.hud-screen .scene3d-selected b { font-weight:400; color:var(--fg); }
+.hud-screen .terrain3d-controls { display:flex; margin:0 0 10px; }
+.hud-screen .terrain3d-controls label { flex:1 1 240px; gap:10px; }
+.hud-screen .terrain3d-controls input[type="range"] { flex:1; }
+.hud-screen .terrain3d-controls select { max-width:320px; }
+.hud-screen .terrain3d-hint { margin:0; color:var(--muted); font-size:11px; }
+
+/* Globe labels (#157): Sun, Earth with the scale caption, the illumination readout at the arrow tip.
+   The scene sets the transform each frame; the label never takes the pointer. */
+.globe-tags { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.globe-tag { position:absolute; left:0; top:0; visibility:hidden; white-space:nowrap; will-change:transform; font-family:var(--font-mono, monospace); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg); text-shadow:0 0 4px var(--bg), 0 0 8px var(--bg); text-align:center; }
+.globe-tag small { display:block; margin-top:2px; font-size:9px; letter-spacing:.06em; text-transform:none; color:var(--muted); }
+.globe-tag-sun { margin-top:22px; }
+/* #210 phone: the Earth tag sits near the right edge; the short caption stays on screen. */
+@media (max-width: 760px) { .globe-tag-long { display:none; } }
+.globe-tag-arrow { margin-top:-22px; padding:2px 6px; border-radius:4px; background:color-mix(in srgb, var(--bg) 72%, transparent); color:var(--sun); letter-spacing:.06em; text-transform:none; font-variant-numeric:tabular-nums; }
+.hud-screen .terrain3d-controls .globe-fold { flex:0 0 auto; align-self:flex-start; white-space:nowrap; }
+.hud-screen .terrain3d-controls.globe-folded { width:fit-content; margin-left:auto; }

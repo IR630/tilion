@@ -1,0 +1,20 @@
+/* BETA dsnStations (#259): lane colours, muted so the Sun and Earth bands stay the loudest. */
+.hud-dsn, .dsn-via, .dsn-via-inline { --dsn-g:#c9a45a; --dsn-m:#8fb3a0; --dsn-c:#9d93c9; }
+.hud-dsn { display:grid; grid-template-columns:var(--legend-w) minmax(0, 1fr); align-items:center; height:13px; margin-top:-3px; }
+.hud-dsn-legend { display:flex; align-items:center; gap:5px; padding:0 12px 0 14px; overflow:hidden; white-space:nowrap; font-family:var(--mono); font-size:9.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+/* #295: the gutter is 176 px; "BETA v636" + DSN + G M C fit, the word "snapshot" stays in the tooltip. */
+.hud-dsn-legend .beta-tag { margin-right:0; font-size:8px; line-height:10px; }
+.hud-dsn-legend .beta-tag-more { display:none; }
+.hud-dsn-c { font-weight:600; }
+.hud-dsn-track { min-width:0; height:11px; }
+.hud-dsn-track canvas { display:block; height:11px; }
+.dsn-via .beta-tag { font-size:8px; margin-right:.4em; }
+/* #295: the phone gutter is 58 px, only G M C fit in the row. The BETA mark goes up into the empty gutter
+   beside the time-axis labels, so the band keeps its mark and the dock gets no taller. */
+@media (max-width: 760px) {
+  .hud-dsn-legend { position:relative; overflow:visible; padding:0 4px 0 0; }
+  .hud-dsn-legend .beta-tag { position:absolute; left:0; bottom:100%; margin-bottom:2px; }
+  .hud-dsn-k { display:none; }
+}
+.dsn-via-inline { margin-left:6px; white-space:nowrap; font-size:10px; }
+.dsn-via-inline b { font-weight:600; margin-right:3px; }

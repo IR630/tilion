@@ -1,0 +1,17 @@
+{
+ "siteId": "im1_odysseus",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.018982833094500867,
+ "offsetM": 2321.9067793581635,
+ "minM": 1704.9647037868854,
+ "maxM": 2938.8488549294416,
+ "siteHeightM": 2591.5823535799864,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar80",
+  "polar240"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

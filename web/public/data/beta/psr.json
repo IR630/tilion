@@ -1,0 +1,297 @@
+{
+ "label": "cold-trap candidate (PGDA 69, never lit in 18.6 yr)",
+ "definition": "PGDA 69 AVGVISIB pixel = 0: the 18.6-year mean visible fraction of the solar disc above the LOLA horizon is 0 at the map precision (4e-5). Permanent shadow, not detected ice.",
+ "source": "https://pgda.gsfc.nasa.gov/products/69",
+ "grids": [
+  {
+   "id": "60m",
+   "file": "AVGVISIB_85S_060M_201608.TIF",
+   "coverage": "square grid: 85.0 S at the edge mid-points, 82.9 S at the corners",
+   "minPatchKm2": 0.1,
+   "patches": 2467,
+   "patchAreaKm2": 9306
+  },
+  {
+   "id": "240m",
+   "file": "AVGVISIB_65S_240M_201608.TIF",
+   "coverage": "square grid: 65.0 S at the edge mid-points, 55.2 S at the corners",
+   "minPatchKm2": 1.0,
+   "patches": 2559,
+   "patchAreaKm2": 26122
+  }
+ ],
+ "distance": "true distance to the nearest pixel centre of a patch; 0 = site in shadow",
+ "polygons": "beta/psr_polygons.json",
+ "sites": {
+  "cr1_connecting_ridge": {
+   "grid": "60m",
+   "distanceKm": 2.19,
+   "areaKm2": 0.14,
+   "bearingDeg": 352.3,
+   "patch": "60m-1400",
+   "nearest": {
+    "lat": -89.3681,
+    "lonE": 221.9539
+   },
+   "centroid": {
+    "lat": -89.357,
+    "lonE": 221.9424
+   }
+  },
+  "shackleton_rim": {
+   "grid": "60m",
+   "distanceKm": 2.44,
+   "areaKm2": 234.41,
+   "bearingDeg": 246.3,
+   "patch": "60m-1405",
+   "nearest": {
+    "lat": -89.803,
+    "lonE": 182.0146
+   },
+   "centroid": {
+    "lat": -89.6455,
+    "lonE": 128.2021
+   }
+  },
+  "de_gerlache_rim_gr1": {
+   "grid": "60m",
+   "distanceKm": 4.68,
+   "areaKm2": 0.16,
+   "bearingDeg": 196.7,
+   "patch": "60m-1123",
+   "nearest": {
+    "lat": -88.8423,
+    "lonE": 289.5188
+   },
+   "centroid": {
+    "lat": -88.8493,
+    "lonE": 289.5524
+   }
+  },
+  "a_peak_cabeus_b": {
+   "grid": "240m",
+   "distanceKm": 12.84,
+   "areaKm2": 2.17,
+   "bearingDeg": 322.1,
+   "patch": "240m-1114",
+   "nearest": {
+    "lat": -83.2238,
+    "lonE": 289.5976
+   },
+   "centroid": {
+    "lat": -83.1947,
+    "lonE": 289.5771
+   }
+  },
+  "a_haworth": {
+   "grid": "60m",
+   "distanceKm": 2.07,
+   "areaKm2": 3.76,
+   "bearingDeg": 343.7,
+   "patch": "60m-399",
+   "nearest": {
+    "lat": -86.7419,
+    "lonE": 337.9434
+   },
+   "centroid": {
+    "lat": -86.7077,
+    "lonE": 337.8679
+   }
+  },
+  "a_malapert_massif": {
+   "grid": "60m",
+   "distanceKm": 8.28,
+   "areaKm2": 0.18,
+   "bearingDeg": 111.6,
+   "patch": "60m-199",
+   "nearest": {
+    "lat": -86.0348,
+    "lonE": 2.7304
+   },
+   "centroid": {
+    "lat": -86.0354,
+    "lonE": 2.8373
+   }
+  },
+  "a_mons_mouton_plateau": {
+   "grid": "60m",
+   "distanceKm": 0.76,
+   "areaKm2": 0.99,
+   "bearingDeg": 317.3,
+   "patch": "60m-70",
+   "nearest": {
+    "lat": -84.5776,
+    "lonE": 30.2722
+   },
+   "centroid": {
+    "lat": -84.5559,
+    "lonE": 30.2448
+   }
+  },
+  "a_mons_mouton": {
+   "grid": "60m",
+   "distanceKm": 1.58,
+   "areaKm2": 0.15,
+   "bearingDeg": 269.0,
+   "patch": "60m-206",
+   "nearest": {
+    "lat": -85.4166,
+    "lonE": 31.1969
+   },
+   "centroid": {
+    "lat": -85.4145,
+    "lonE": 31.1038
+   }
+  },
+  "a_nobile_rim_1": {
+   "grid": "60m",
+   "distanceKm": 4.74,
+   "areaKm2": 0.6,
+   "bearingDeg": 286.4,
+   "patch": "60m-200",
+   "nearest": {
+    "lat": -85.1514,
+    "lonE": 35.4046
+   },
+   "centroid": {
+    "lat": -85.1421,
+    "lonE": 35.1613
+   }
+  },
+  "a_nobile_rim_2": {
+   "grid": "240m",
+   "distanceKm": 2.52,
+   "areaKm2": 3.49,
+   "bearingDeg": 320.5,
+   "patch": "240m-985",
+   "nearest": {
+    "lat": -83.8421,
+    "lonE": 57.32
+   },
+   "centroid": {
+    "lat": -83.8146,
+    "lonE": 57.173
+   }
+  },
+  "a_de_gerlache_rim_2": {
+   "grid": "60m",
+   "distanceKm": 6.37,
+   "areaKm2": 247.95,
+   "bearingDeg": 245.4,
+   "patch": "60m-1362",
+   "nearest": {
+    "lat": -88.218,
+    "lonE": 282.1459
+   },
+   "centroid": {
+    "lat": -88.3138,
+    "lonE": 269.1719
+   }
+  },
+  "a_slater_plain": {
+   "grid": "60m",
+   "distanceKm": 2.6,
+   "areaKm2": 0.9,
+   "bearingDeg": 55.7,
+   "patch": "60m-1756",
+   "nearest": {
+    "lat": -87.0813,
+    "lonE": 129.2512
+   },
+   "centroid": {
+    "lat": -87.0717,
+    "lonE": 129.5441
+   }
+  },
+  "im1_odysseus": {
+   "grid": "240m",
+   "distanceKm": 8.38,
+   "areaKm2": 14.32,
+   "bearingDeg": 209.2,
+   "patch": "240m-340",
+   "nearest": {
+    "lat": -80.3702,
+    "lonE": 0.6342
+   },
+   "centroid": {
+    "lat": -80.4637,
+    "lonE": 0.5311
+   }
+  },
+  "im2_athena": {
+   "grid": "60m",
+   "distanceKm": 2.16,
+   "areaKm2": 0.37,
+   "bearingDeg": 249.8,
+   "patch": "60m-98",
+   "nearest": {
+    "lat": -84.8148,
+    "lonE": 28.4561
+   },
+   "centroid": {
+    "lat": -84.818,
+    "lonE": 28.3438
+   }
+  },
+  "chandrayaan3": {
+   "grid": "240m",
+   "distanceKm": 59.65,
+   "areaKm2": 24.85,
+   "bearingDeg": 162.2,
+   "patch": "240m-78",
+   "nearest": {
+    "lat": -71.2368,
+    "lonE": 34.1983
+   },
+   "centroid": {
+    "lat": -71.3247,
+    "lonE": 34.1235
+   }
+  },
+  "chandrayaan2_crash": {
+   "grid": "240m",
+   "distanceKm": 60.71,
+   "areaKm2": 3.88,
+   "bearingDeg": 115.7,
+   "patch": "240m-64",
+   "nearest": {
+    "lat": -71.6585,
+    "lonE": 28.5332
+   },
+   "centroid": {
+    "lat": -71.6627,
+    "lonE": 28.7424
+   }
+  },
+  "luna25_target": {
+   "grid": "240m",
+   "distanceKm": 45.42,
+   "areaKm2": 17.1,
+   "bearingDeg": 295.8,
+   "patch": "240m-56",
+   "nearest": {
+    "lat": -68.8497,
+    "lonE": 39.8069
+   },
+   "centroid": {
+    "lat": -68.8186,
+    "lonE": 39.6413
+   }
+  },
+  "change7_target": {
+   "grid": "60m",
+   "distanceKm": 4.86,
+   "areaKm2": 6.03,
+   "bearingDeg": 159.7,
+   "patch": "60m-1455",
+   "nearest": {
+    "lat": -88.9487,
+    "lonE": 126.4278
+   },
+   "centroid": {
+    "lat": -88.9631,
+    "lonE": 129.7919
+   }
+  }
+ }
+}

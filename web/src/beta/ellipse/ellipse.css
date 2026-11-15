@@ -1,0 +1,17 @@
+.beta-ellipse { border: 1px solid var(--line); background: var(--panel); padding: 12px 14px; margin-top: 12px; }
+.beta-ellipse h3 { margin: 0 0 6px; font: 600 14px var(--font-display); display: flex; gap: 8px; align-items: center; }
+.beta-tag { font: 600 10px var(--font-mono); letter-spacing: .08em; border: 1px solid var(--warn); color: var(--warn); padding: 1px 5px; border-radius: var(--radius); }
+.beta-ellipse .beta-note { color: var(--muted); font-size: 12px; margin: 0 0 8px; }
+.beta-ellipse table { border-collapse: collapse; width: 100%; font: 12px var(--font-mono); font-variant-numeric: tabular-nums; }
+.beta-ellipse th, .beta-ellipse td { text-align: right; padding: 4px 8px; border-bottom: 1px solid var(--line); }
+.beta-ellipse th:first-child, .beta-ellipse td:first-child { text-align: left; }
+.beta-ellipse th { color: var(--muted); font-weight: 500; }
+.beta-ellipse tr[aria-selected="true"] td { background: var(--active-soft); }
+.beta-ellipse .beta-radii { display: flex; gap: 6px; margin: 10px 0 6px; }
+.beta-ellipse .beta-radii button { font: 12px var(--font-mono); background: none; color: var(--fg); border: 1px solid var(--line-strong); padding: 3px 9px; border-radius: var(--radius); cursor: pointer; }
+.beta-ellipse .beta-radii button[aria-pressed="true"] { border-color: var(--fg); background: var(--hover); }
+.beta-ellipse svg { width: 100%; max-width: 420px; display: block; }
+.beta-ellipse svg text { fill: var(--muted); font: 10px var(--font-mono); }
+.beta-ellipse .bar-sun { fill: var(--sun); }
+.beta-ellipse .bar-earth { fill: var(--earth); }
+.beta-ellipse .bar-bg { fill: var(--line); }

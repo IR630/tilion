@@ -1,0 +1,30 @@
+[project]
+name = "api"
+version = "0.1.0"
+description = "Бэкенд решения (пресет web-fullstack)"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "fastapi>=0.115",
+  "numpy>=2.5.4",
+  "rasterio>=1.5.2",
+  "spiceypy>=8.4.0",
+  "uvicorn>=0.30",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.3", "ruff>=0.6", "httpx2>=2.0", "pytest-xdist>=3.8"]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/api", "src/precompute"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

@@ -1,0 +1,26 @@
+/* Drive elevation profile (#164): under the itinerary in the mission panel. */
+.elev { padding-top:12px; border-top:1px solid var(--line); }
+.elev > summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:6px; }
+.elev > summary::-webkit-details-marker { display:none; }
+.elev > summary::before { content:""; width:0; height:0; border:4px solid transparent; border-left-color:var(--muted); transform-origin:2px 4px; transition:transform .12s; margin-bottom:8px; }
+.elev[open] > summary::before { transform:rotate(90deg); }
+.elev > summary .rp-eyebrow { margin-bottom:8px; }
+.elev-stats { display:grid; grid-template-columns:repeat(3, 1fr); margin:0 0 8px; border:1px solid var(--line); }
+.elev-stats > div { padding:5px 8px; border-left:1px solid var(--line); border-top:1px solid var(--line); }
+.elev-stats > div:nth-child(3n + 1) { border-left:0; }
+.elev-stats > div:nth-child(-n + 3) { border-top:0; }
+.elev-stats dt { font-family:var(--font-mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.elev-stats dd { margin:1px 0 0; font-size:13px; font-variant-numeric:tabular-nums; color:var(--fg); }
+.elev .is-warn { color:var(--warn); }
+.elev .is-sun { color:var(--sun); }
+.elev .is-earth { color:var(--earth); }
+.elev-plot { position:relative; width:100%; }
+.elev-plot canvas { display:block; touch-action:none; }
+.elev-tip { position:absolute; top:14px; transform:translateX(10px); display:flex; flex-wrap:wrap; gap:2px 8px; max-width:200px; padding:5px 8px; background:var(--panel-2); border:1px solid var(--line-strong); font-family:var(--font-mono); font-size:10.5px; color:var(--muted); font-variant-numeric:tabular-nums; pointer-events:none; z-index:2; }
+.elev-tip.is-left { transform:translateX(calc(-100% - 10px)); }
+.elev-tip b { color:var(--fg); font-weight:500; }
+.elev-foot { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px 12px; margin-top:4px; }
+.elev-rover { margin:0; font-size:11.5px; color:var(--fg); font-variant-numeric:tabular-nums; }
+.elev-controls { display:flex; align-items:center; gap:10px; }
+.elev-controls label { display:flex; align-items:center; gap:5px; font-family:var(--font-mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.elev-controls select { background:var(--panel); color:var(--fg); border:1px solid var(--line-strong); border-radius:var(--radius); font:inherit; font-size:11px; letter-spacing:0; text-transform:none; padding:2px 4px; }

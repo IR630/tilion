@@ -1,0 +1,24 @@
+{
+ "startUtc": "2026-12-01T00:00:00Z",
+ "stepMin": 60,
+ "n": 9505,
+ "frame": "MOON_ME",
+ "abcorr": "LT+S",
+ "ephemFile": "ephem.bin",
+ "sunRadiusKm": 695700.0,
+ "earthRadiusKm": 6378.1366,
+ "dem": {
+  "dir": "dem240/",
+  "tilePx": 388,
+  "tiles": 20,
+  "minLat": -60.0,
+  "source": "LDEM_60S_240MPP_ADJ.TIF",
+  "width": 7760,
+  "height": 7760,
+  "x0": -931200.0,
+  "y0": 931200.0,
+  "dx": 240.0,
+  "dy": -240.0,
+  "scaleM": 0.5
+ }
+}

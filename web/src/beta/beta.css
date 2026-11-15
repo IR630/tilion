@@ -1,0 +1,66 @@
+.beta-tag {
+  display: inline-block;
+  margin-right: 0.5em;
+  padding: 0 0.4em;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-size: 0.7em;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.beta-row {
+  margin: 0.4em 0;
+  font-size: 0.9em;
+}
+.beta-row button {
+  font: inherit;
+  cursor: pointer;
+}
+/* #290 Globe thermal mode: colour bar under the Thermal button in the globe controls. */
+.thermal-legend { width: min(260px, 100%); text-align: left; text-transform: none; letter-spacing: 0.02em; font-family: var(--h-mono, monospace); font-size: 10.5px; color: var(--muted); text-shadow: 0 0 4px var(--bg), 0 0 8px var(--bg); }
+.thermal-legend-bar { height: 10px; border: 1px solid var(--muted); }
+.thermal-legend-ticks { position: relative; height: 1.4em; margin: 2px 0 0; }
+.thermal-legend-ticks span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.thermal-legend-ticks span:first-child { transform: none; }
+.thermal-legend-ticks span:last-child { transform: translateX(-100%); }
+.thermal-site { margin: 6px 0 0; padding-top: 4px; border-top: 1px solid var(--muted); }
+.thermal-site dt { color: var(--fg); }
+.thermal-site dd { margin: 0; line-height: 1.35; }
+.thermal-legend p { margin: 2px 0 0; line-height: 1.35; }
+.globe-thermal { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.thermal-legend summary { cursor: pointer; color: var(--fg); margin: 0 0 4px; }
+/* #290 Compare: temperature statistics and chart. */
+.thermal-compare { margin: 18px 0 0; }
+.thermal-compare h3 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+.thermal-compare td small { color: var(--muted); }
+/* #399 phone: °C under K, so the table fits 390 px without breaking a number from its unit. */
+@media (max-width: 760px) {
+  .thermal-compare { overflow-x: auto; }
+  .thermal-compare td small { display: block; font-size: 10.5px; }
+  .hud-screen.compare .thermal-compare th, .hud-screen.compare .thermal-compare td { padding-left: 0; padding-right: 6px; letter-spacing: 0; }
+  .thermal-compare td { font-size: 13px; }
+  .hud-screen.compare .thermal-compare th { font-size: 9px; }
+  .thermal-compare td:first-child { font-size: 12px; }
+}
+.thermal-swatch { display: inline-block; width: 10px; height: 3px; vertical-align: middle; margin-right: 4px; }
+.thermal-chart { width: 100%; max-width: 760px; height: auto; margin: 10px 0 0; font-family: var(--font-mono); font-size: 9px; fill: var(--muted); }
+.thermal-grid { stroke: var(--line); stroke-width: 1; }
+.thermal-now { stroke: var(--fg); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.7; }
+/* #335 Compare: what the date slip changes, in sentences. */
+.slip-report { margin: 14px 0 0; }
+.slip-report h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+.slip-report h3 button { margin-left: 4px; background: none; color: var(--fg); border: 1px solid var(--line-strong); padding: 2px 10px; cursor: pointer; font: inherit; font-weight: 400; }
+.slip-report-site { margin: 0 0 8px; }
+.slip-report-name { margin: 0 0 2px; color: var(--fg); }
+.slip-report ul { margin: 0; padding: 0; list-style: none; }
+.slip-report li { margin: 2px 0; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.slip-report-mark { display: inline-block; width: 1.2em; }
+.slip-report li.is-better .slip-report-mark { color: var(--fg); }
+.slip-report li.is-worse .slip-report-mark { color: var(--bad); }
+.slip-report li.is-same .slip-report-mark, .slip-report li.is-none .slip-report-mark { color: var(--muted); }
+.slip-report-note { color: var(--muted); font-weight: 400; font-size: 12px; }
+/* #379 place card: sunset and Earthset band from the LOLA height error, under "Sunset in". */
+.beta-spread { display: block; margin-top: 2px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.beta-spread .beta-tag-more { display: none; }

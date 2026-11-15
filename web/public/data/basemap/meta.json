@@ -1,0 +1,193 @@
+{
+ "projection": "south polar stereographic, R = 1737.4 km, lon 0E = +y; map lng/lat = metres / 1e6 (D-005)",
+ "layers": [
+  {
+   "id": "sun65",
+   "kind": "sun",
+   "file": "sun65.webp",
+   "bounds": [
+    -770400.0,
+    -770400.0,
+    770400.0,
+    770400.0
+   ],
+   "source": "AVGVISIB_65S_240M_201608.TIF, https://pgda.gsfc.nasa.gov/products/69"
+  },
+  {
+   "id": "sun85",
+   "kind": "sun",
+   "file": "sun85.webp",
+   "bounds": [
+    -151740.0,
+    -151740.0,
+    151740.0,
+    151740.0
+   ],
+   "source": "AVGVISIB_85S_060M_201608.TIF, https://pgda.gsfc.nasa.gov/products/69"
+  },
+  {
+   "id": "earth65",
+   "kind": "earth",
+   "file": "earth65.webp",
+   "bounds": [
+    -770400.0,
+    -770400.0,
+    770400.0,
+    770400.0
+   ],
+   "source": "AVGVISIB_65S_240M_201608_EARTH.TIF, https://pgda.gsfc.nasa.gov/products/69"
+  },
+  {
+   "id": "earth85",
+   "kind": "earth",
+   "file": "earth85.webp",
+   "bounds": [
+    -151740.0,
+    -151740.0,
+    151740.0,
+    151740.0
+   ],
+   "source": "AVGVISIB_85S_060M_201608_EARTH.TIF, https://pgda.gsfc.nasa.gov/products/69"
+  }
+ ],
+ "legend": {
+  "sun": "mean visible fraction of the solar disc over 18.6 years (Mazarico et al. 2011, PGDA 69)",
+  "earth": "share of time any part of Earth is visible over 18.6 years (Mazarico et al. 2011, PGDA 69)",
+  "ramp": {
+   "sun": [
+    [
+     0.0,
+     [
+      20,
+      16,
+      10
+     ]
+    ],
+    [
+     0.3,
+     [
+      120,
+      70,
+      10
+     ]
+    ],
+    [
+     0.6,
+     [
+      242,
+      182,
+      50
+     ]
+    ],
+    [
+     1.0,
+     [
+      255,
+      245,
+      200
+     ]
+    ]
+   ],
+   "earth": [
+    [
+     0.0,
+     [
+      8,
+      14,
+      30
+     ]
+    ],
+    [
+     0.3,
+     [
+      20,
+      60,
+      140
+     ]
+    ],
+    [
+     0.6,
+     [
+      78,
+      161,
+      255
+     ]
+    ],
+    [
+     1.0,
+     [
+      215,
+      240,
+      255
+     ]
+    ]
+   ]
+  }
+ },
+ "tiles": {
+  "tileSize": 256,
+  "note": "XYZ WebP 256 px; map lng/lat = polar stereographic metres / 1e6 (D-005); bounds in m",
+  "sets": [
+   {
+    "id": "relief-240m-z7",
+    "layer": "relief",
+    "minzoom": 7,
+    "maxzoom": 12,
+    "bounds": [
+     -931200.0,
+     -931200.0,
+     931200.0,
+     931200.0
+    ],
+    "resolutionM": 240,
+    "source": "LOLA 240 m, LDEM_60S_240MPP_ADJ.TIF, https://pgda.gsfc.nasa.gov/products/90",
+    "url": "tiles/relief/{z}/{x}/{y}.webp"
+   },
+   {
+    "id": "relief-80m-z13",
+    "layer": "relief",
+    "minzoom": 13,
+    "maxzoom": 14,
+    "bounds": [
+     -304000.0,
+     -304000.0,
+     304000.0,
+     304000.0
+    ],
+    "resolutionM": 80,
+    "source": "LOLA 80 m, LDEM_80S_80MPP_ADJ.TIF, https://pgda.gsfc.nasa.gov/products/90",
+    "url": "tiles/relief/{z}/{x}/{y}.webp"
+   },
+   {
+    "id": "relief-20m-z15",
+    "layer": "relief",
+    "minzoom": 15,
+    "maxzoom": 16,
+    "bounds": [
+     -304000.0,
+     -304000.0,
+     304000.0,
+     304000.0
+    ],
+    "resolutionM": 20,
+    "source": "LOLA 20 m, LDEM_80S_20MPP_ADJ.TIF, https://pgda.gsfc.nasa.gov/products/90",
+    "url": "tiles/relief/{z}/{x}/{y}.webp"
+   },
+   {
+    "id": "photo-100m-z7",
+    "layer": "photo",
+    "minzoom": 7,
+    "maxzoom": 13,
+    "bounds": [
+     -931100.0,
+     -931100.0,
+     931100.0,
+     931100.0
+    ],
+    "resolutionM": 100,
+    "source": "LROC WAC 100 m, WAC_GLOBAL_P900S0000_100M.IMG, https://wms.lroc.asu.edu/lroc/view_rdr_product/WAC_GLOBAL_P900S0000_100M",
+    "url": "tiles/photo/{z}/{x}/{y}.webp"
+   }
+  ]
+ }
+}

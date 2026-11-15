@@ -1,0 +1,67 @@
+{
+ "id": "NAC_DTM_SHACKRDGE02_M139797542_350CM",
+ "place": "Shackleton–de Gerlache ridge",
+ "split": "dev",
+ "images": [
+  "M139797542LC",
+  "M139797542RC"
+ ],
+ "imageUrls": [
+  "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1005/DATA/SCI/2010265/NAC/M139797542LC.IMG",
+  "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1005/DATA/SCI/2010265/NAC/M139797542RC.IMG"
+ ],
+ "orthoUrl": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/NAC_DTM/SHACKRDGE02/NAC_DTM_SHACKRDGE02_M139797542_350CM.IMG",
+ "page": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/NAC_DTM_SHACKRDGE02_M139797542_350CM",
+ "startUtc": "2010-09-22T12:24:35.110",
+ "stopUtc": "2010-09-22T12:25:12.965",
+ "midUtc": "2010-09-22T12:24:54.0",
+ "pixelM": 3.5,
+ "cellM": 21.0,
+ "bounds": [
+  -13711.25,
+  -13221.25,
+  -7579.25,
+  -8223.25
+ ],
+ "centre": {
+  "lonE": 224.7935,
+  "lat": -89.5017
+ },
+ "sun": {
+  "az": 144.105,
+  "el": 1.168,
+  "radius": 0.2648
+ },
+ "shiftM": [
+  0.0,
+  -38.5
+ ],
+ "shiftCorrelation": 0.809,
+ "cells": 58826,
+ "otsuIof": 0.01961,
+ "imageShadowPct": 39.7,
+ "modelShadowPct": 20.2,
+ "agreementPct": 80.4,
+ "shadowIou": 0.507,
+ "sphereAgreementPct": 60.3,
+ "modelShadowDarkPct": 99.8,
+ "minAgreementPct": 85.0,
+ "minIou": 0.7,
+ "pass": false,
+ "reason": "agreement 80.4 % < 85 %; shadow IoU 0.51 < 0.7",
+ "image": "NAC_DTM_SHACKRDGE02_M139797542_350CM.webp",
+ "mask": "NAC_DTM_SHACKRDGE02_M139797542_350CM_mask.webp",
+ "terrain": "LOLA 20 m window, 80 m, 240 m beyond (PGDA 90)",
+ "s9": {
+  "albedo": 0.1431,
+  "excludedPct": 4.3,
+  "imageShadowPct": 19.6,
+  "modelShadowPct": 19.4,
+  "agreementPct": 99.3,
+  "shadowIou": 0.964,
+  "sphereAgreementPct": 80.4,
+  "pass": true,
+  "reason": "agreement 99.3 % ≥ 85 %, shadow IoU 0.96 ≥ 0.7, bare sphere 80.4 %, left out 4.3 %",
+  "mask": "NAC_DTM_SHACKRDGE02_M139797542_350CM_mask9.webp"
+ }
+}

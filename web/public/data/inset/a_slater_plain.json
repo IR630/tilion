@@ -1,0 +1,17 @@
+{
+ "siteId": "a_slater_plain",
+ "file": "a_slater_plain.webp",
+ "bounds": [
+  66212.52093053209,
+  -55908.466468058854,
+  71212.52093053209,
+  -50908.466468058854
+ ],
+ "sizePx": 512,
+ "sizeM": 5000.0,
+ "pixelM": 9.765625,
+ "resolutionM": 20,
+ "source": "LOLA 20 M",
+ "shading": "multi-directional hillshade, Sun-independent, vertical x2",
+ "layout": "row 0 = ymax (0 deg E side), col 0 = xmin; bounds in polar stereographic metres"
+}

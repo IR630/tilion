@@ -1,0 +1,85 @@
+/* Mission calendar (#159): month grid in the navigator's left column. Flat surface, HUD tokens only.
+   A day = number row + two bar lanes; a 3 px band at the bottom = the day's light at the site. */
+.mcal { flex:none; display:flex; flex-direction:column; min-height:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); --mcal-lane:15px; --mcal-day:calc(19px + 2 * var(--mcal-lane) + 7px); }
+/* The left slot of the navigator (#158) holds the calendar. Folded, the slot has no box of its own. */
+.lslot { display:flex; flex-direction:column; min-height:0; }
+.lslot:has(> .mcal:not(.is-open)) { display:contents; }
+/* Folded: only the icon, inside the right end of the search pill (as the icons of a map search box).
+   It takes no room of its own in the column, so the map and the site inset keep the corners. */
+.mcal:not(.is-open) { position:absolute; top:0; right:0; border-color:transparent; background:none; }
+.mcal:not(.is-open) .mcal-head { height:46px; padding:0 8px; }
+.mcal:not(.is-open) .mcal-title { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.mcal:not(.is-open) .mcal-fold { position:absolute; }
+.lcol:has(.mcal:not(.is-open)) > .pill:not(.pill-route) { padding-right:46px; }
+/* The route header is two rows: the icon sits in the second row, left of the close button. */
+.lcol:has(> .pill-route) .mcal:not(.is-open) { top:43px; right:66px; }
+.lcol:has(> .pill-route) .mcal:not(.is-open) .mcal-head { height:30px; padding:0; }
+/* The globe start screen belongs to the hero: the calendar comes with the map. */
+.navigator.is-globe .mcal { display:none; }
+.mcal-head { display:flex; align-items:center; gap:8px; height:40px; padding:0 6px; }
+.mcal-toggle { width:30px; height:30px; display:grid; place-items:center; padding:0; border:0; color:var(--muted); background:none; cursor:pointer; transition:color .15s; }
+.mcal-toggle:hover { color:var(--fg); }
+.mcal.is-open .mcal-toggle { color:var(--active); }
+.mcal-title { flex:1; margin:0; font-family:var(--font-mono); font-size:11px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--fg); white-space:nowrap; }
+.mcal-nav { display:flex; gap:2px; }
+.mcal-arrow { width:30px; height:30px; display:grid; place-items:center; padding:0; border:0; background:none; color:var(--muted); cursor:pointer; }
+.mcal-arrow:hover:not(:disabled) { color:var(--fg); background:var(--hover); }
+.mcal-arrow.is-prev svg { transform:rotate(90deg); }
+.mcal-arrow.is-next svg { transform:rotate(-90deg); }
+
+/* Fold: rows 0fr ↔ 1fr animates the height without measuring it. */
+.mcal-fold { display:grid; grid-template-rows:0fr; transition:grid-template-rows .22s ease-out; min-height:0; }
+.mcal.is-open .mcal-fold { grid-template-rows:1fr; }
+.mcal-inner { min-height:0; overflow:hidden; display:flex; flex-direction:column; }
+.mcal:not(.is-open) .mcal-inner { visibility:hidden; transition:visibility 0s .22s; }
+.mcal-dow { display:grid; grid-template-columns:repeat(7, 1fr); padding:0 8px 4px; border-bottom:1px solid var(--line); }
+.mcal-dow span { font-family:var(--font-mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); text-align:center; }
+.mcal-scroll { max-height:calc(6 * var(--mcal-day) + 6px); overflow-y:auto; padding:0 8px; overscroll-behavior:contain; }
+
+.mcal-weeks.from-next { animation:mcal-next .22s ease-out; }
+.mcal-weeks.from-prev { animation:mcal-prev .22s ease-out; }
+@keyframes mcal-next { from { opacity:0; transform:translateY(10px); } }
+@keyframes mcal-prev { from { opacity:0; transform:translateY(-10px); } }
+
+.mcal-week { position:relative; display:grid; grid-template-columns:repeat(7, 1fr); border-bottom:1px solid var(--line); }
+.mcal-day { position:relative; height:var(--mcal-day); display:flex; align-items:flex-start; justify-content:space-between; gap:2px; padding:2px 4px 0; border:0; border-radius:0; background:none; color:var(--fg); text-align:left; cursor:pointer; transition:background .12s; }
+.mcal-day:hover:not(:disabled) { background:var(--hover); }
+.mcal-day:disabled { cursor:default; opacity:1; }
+.mcal-day:disabled .mcal-num { color:var(--dim); }
+.mcal-day.is-out .mcal-num { color:var(--muted); }
+.mcal-num { display:inline-grid; place-items:center; min-width:18px; height:18px; padding:0 3px; border-radius:9px; font-family:var(--font-mono); font-size:11px; line-height:1; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.mcal-day.is-first .mcal-num { font-weight:600; letter-spacing:.04em; }
+.mcal-day.is-today .mcal-num { background:var(--active); color:var(--accent); }
+.mcal-day.is-at { background:var(--active-soft); box-shadow:inset 0 0 0 1px var(--active); }
+.mcal-day.is-at .mcal-num { color:var(--accent); font-weight:600; }
+.mcal-more { font-family:var(--font-mono); font-size:9.5px; line-height:18px; color:var(--muted); }
+.mcal-light { position:absolute; left:2px; right:2px; bottom:2px; height:3px; opacity:.85; }
+
+/* Bars sit over the day buttons; only the bars take the pointer. */
+.mcal-bars { position:absolute; left:0; right:0; top:20px; display:grid; grid-template-columns:repeat(7, 1fr); grid-auto-rows:var(--mcal-lane); row-gap:1px; pointer-events:none; }
+.mcal-bar { pointer-events:auto; min-width:0; margin:0 1px; padding:0 5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border:0; border-radius:0; background:color-mix(in srgb, var(--fg) 16%, var(--panel)); color:var(--fg); font-size:11px; font-weight:500; line-height:var(--mcal-lane); text-align:left; cursor:pointer; transition:background .12s, color .12s; }
+.mcal-bar:hover { background:color-mix(in srgb, var(--fg) 26%, var(--panel)); color:var(--accent); }
+.mcal-bar.is-head { margin-left:3px; border-top-left-radius:3px; border-bottom-left-radius:3px; }
+.mcal-bar.is-tail { margin-right:3px; border-top-right-radius:3px; border-bottom-right-radius:3px; }
+.mcal-bar.is-active { background:var(--active); color:var(--accent); }
+.mcal-bar.is-active:hover { background:color-mix(in srgb, var(--active) 82%, var(--fg)); }
+
+.mcal-empty { margin:8px 12px 0; font-size:12px; color:var(--muted); }
+.mcal-legend { display:flex; flex-wrap:nowrap; overflow:hidden; align-items:center; gap:4px 10px; margin:0; padding:8px 12px 10px; font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; color:var(--muted); }
+.mcal-legend-site { color:var(--fg); max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.mcal-key { display:inline-flex; align-items:center; gap:5px; white-space:nowrap; }
+.mcal-key i { width:10px; height:3px; }
+
+@media (max-width: 760px) {
+  /* The map controls float at the top right: the calendar keeps clear of them. */
+  .mcal { --mcal-lane:14px; }
+  .mcal.is-open { margin-right:48px; }
+  .mcal-scroll { max-height:34vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mcal-fold, .mcal-day, .mcal-bar { transition:none; }
+  .mcal-weeks.from-next, .mcal-weeks.from-prev { animation:none; }
+}
+/* A rail sheet (Compare, Windows, NASA check) covers the map from the column edge. The open calendar is
+   inert under it and its right part was cut by the sheet edge: hide it until the sheet closes. */
+.app:has(.layer-sheet) .mcal.is-open { visibility:hidden; }

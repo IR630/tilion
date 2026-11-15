@@ -1,0 +1,16 @@
+{
+ "siteId": "luna25_target",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.01969628776244891,
+ "offsetM": 590.275038672029,
+ "minM": -49.85431360756047,
+ "maxM": 1230.4043909516186,
+ "siteHeightM": 309.92072709597414,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar240"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

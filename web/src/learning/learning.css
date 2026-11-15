@@ -1,0 +1,4 @@
+.learning { margin: 1rem 0; padding: 1rem; border: 1px solid var(--line, #526277); border-radius: 0.6rem; }
+.learning fieldset { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 0.8rem 0; }
+.learning form { margin: 1rem 0; }
+.learning label { cursor: pointer; }

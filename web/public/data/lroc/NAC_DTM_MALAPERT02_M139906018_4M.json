@@ -1,0 +1,67 @@
+{
+ "id": "NAC_DTM_MALAPERT02_M139906018_4M",
+ "place": "Malapert massif, west",
+ "split": "test",
+ "images": [
+  "M139906018LC",
+  "M139906018RC"
+ ],
+ "imageUrls": [
+  "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1005/DATA/SCI/2010266/NAC/M139906018LC.IMG",
+  "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1005/DATA/SCI/2010266/NAC/M139906018RC.IMG"
+ ],
+ "orthoUrl": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/NAC_DTM/MALAPERT02/NAC_DTM_MALAPERT02_M139906018_4M.IMG",
+ "page": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/NAC_DTM_MALAPERT02_M139906018_4M",
+ "startUtc": "2010-09-23T18:32:31.363",
+ "stopUtc": "2010-09-23T18:33:07.427",
+ "midUtc": "2010-09-23T18:32:49.4",
+ "pixelM": 4.0,
+ "cellM": 20.0,
+ "bounds": [
+  -4602.0,
+  134574.0,
+  638.0,
+  142574.0
+ ],
+ "centre": {
+  "lonE": 359.1806,
+  "lat": -85.4321
+ },
+ "sun": {
+  "az": 354.402,
+  "el": 6.122,
+  "radius": 0.2649
+ },
+ "shiftM": [
+  4.0,
+  -32.0
+ ],
+ "shiftCorrelation": 0.886,
+ "cells": 51291,
+ "otsuIof": 0.01704,
+ "imageShadowPct": 49.6,
+ "modelShadowPct": 4.1,
+ "agreementPct": 54.5,
+ "shadowIou": 0.082,
+ "sphereAgreementPct": 50.4,
+ "modelShadowDarkPct": 100.0,
+ "minAgreementPct": 85.0,
+ "minIou": 0.7,
+ "pass": false,
+ "reason": "agreement 54.5 % < 85 %; shadow IoU 0.08 < 0.7",
+ "image": "NAC_DTM_MALAPERT02_M139906018_4M.webp",
+ "mask": "NAC_DTM_MALAPERT02_M139906018_4M_mask.webp",
+ "terrain": "LOLA 20 m window, 80 m, 240 m beyond (PGDA 90)",
+ "s9": {
+  "albedo": 0.1172,
+  "excludedPct": 5.7,
+  "imageShadowPct": 3.8,
+  "modelShadowPct": 3.4,
+  "agreementPct": 98.5,
+  "shadowIou": 0.651,
+  "sphereAgreementPct": 96.2,
+  "pass": false,
+  "reason": "shadow IoU 0.65 < 0.7",
+  "mask": "NAC_DTM_MALAPERT02_M139906018_4M_mask9.webp"
+ }
+}

@@ -1,0 +1,18 @@
+{
+  "extentMeters": 32000.0,
+  "projection": "south polar stereographic, R=1737.4 km, x east, y toward lon 0, row 0 = +y",
+  "horizon": {
+    "file": "field_pole.bin.gz",
+    "encoding": "gzip; byte deltas between consecutive azimuth layers (mod 256)",
+    "size": 256,
+    "cellMeters": 250.0,
+    "azimuthBins": 180,
+    "observerHeightM": 2.0,
+    "layout": "uint8 [azimuthBin][row][col], azimuth from local north toward east",
+    "decode": {
+      "offsetDeg": -8.0,
+      "stepDeg": 0.1
+    }
+  },
+  "note": "Cropped by Tilion to \u00b132 km (256\u00d7256) from Lunar Window adqm0001/lunar-window@13d45a98 field_pole (\u00b140 km, 320\u00d7320); values unchanged. heights/slope entries not shipped."
+}

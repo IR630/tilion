@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tilion — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+@font-face{font-family:"Chakra Petch";font-style:normal;font-weight:500;font-display:block;src:url("fonts/chakra-petch-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Chakra Petch";font-style:normal;font-weight:600;font-display:block;src:url("fonts/chakra-petch-latin-600-normal.woff2") format("woff2")}
+/* Site tokens from web/src/styles.css */
+:root{--bg:#08090a;--fg:#e6e6e2;--muted:#8a8c8f;--dim:#575a5e;--line:#25272a;--line-strong:#3b3e42;--red:#ff5a1f;--blue:#4a90e2;--sun:var(--red);
+--ui:"IBM Plex Sans",system-ui,sans-serif;--mono:"JetBrains Mono",monospace;--display:"Chakra Petch",system-ui,sans-serif}
+@page{size:1920px 1080px;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--fg);font-family:var(--ui)}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;page-break-after:always;padding:96px 112px;
+ background:radial-gradient(1200px 700px at 85% 110%,#15171a 0%,transparent 70%),var(--bg)}
+.slide::before{content:"";position:absolute;inset:0;pointer-events:none;
+ background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+ background-size:96px 96px;opacity:.35;mask-image:linear-gradient(180deg,#000 0%,transparent 60%)}
+.chrome{position:absolute;left:112px;right:112px;bottom:48px;display:flex;justify-content:space-between;
+ font:400 18px/1 var(--mono);color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+.kicker{font:500 20px/1 var(--mono);color:var(--red);letter-spacing:.14em;text-transform:uppercase;margin-bottom:28px}
+h1{font:300 200px/0.9 var(--ui);letter-spacing:.18em}
+h2{font:600 76px/1.05 var(--display);letter-spacing:-.01em;max-width:1500px}
+h2 em{color:var(--red);font-style:normal}
+p.lead{font:300 34px/1.4 var(--ui);color:var(--fg);max-width:1100px}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+.shot{position:absolute;border:1px solid var(--line-strong);background:#000}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
+.split{display:grid;grid-template-columns:560px 1fr;gap:64px;height:100%;position:relative}
+.split .text{display:flex;flex-direction:column;justify-content:center;gap:36px}
+.split .shot{position:relative;align-self:center;height:700px}
+ul.facts{list-style:none;display:flex;flex-direction:column;gap:22px}
+ul.facts li{font:300 28px/1.35 var(--ui);padding-left:28px;position:relative}
+ul.facts li::before{content:"";position:absolute;left:0;top:15px;width:12px;height:2px;background:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.card{border:1px solid var(--line-strong);padding:32px 32px 28px;background:rgba(255,255,255,.015)}
+.card .v{font:500 60px/1 var(--mono);color:var(--red)}
+.card .v small{font-size:26px;color:var(--muted);margin-left:8px}
+.card .k{font:400 24px/1.35 var(--ui);margin-top:18px}
+.card .s{font:400 17px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+.tag{display:inline-block;border:1px solid var(--line-strong);padding:10px 16px;font:400 20px/1 var(--mono);color:var(--muted);margin:0 10px 10px 0}
+</style>
+</head>
+<body>
+
+<!-- 1 — Title -->
+<section class="slide">
+ <div class="shot" style="left:860px;top:0;width:1060px;height:1080px;border:0;opacity:.9">
+  <img src="c3.jpg" alt="" style="object-position:62% 30%"></div>
+ <div style="position:absolute;left:820px;top:0;width:360px;height:1080px;background:linear-gradient(90deg,var(--bg),transparent)"></div>
+ <div style="position:relative;margin-top:180px">
+  <div class="kicker">Lunar south pole · landing site navigator</div>
+  <h1>TILION</h1>
+  <p class="lead" style="margin-top:56px;max-width:760px">Is the Sun up? When is sunset? Can we see Earth? — over the <em style="color:var(--red);font-style:normal">real terrain horizon</em> of a landing site, for any date.</p>
+ </div>
+ <div class="chrome"><span>NASA Space Apps Challenge 2026</span><span>tilion.nedovost.org</span></div>
+</section>
+
+<!-- 2 — Problem -->
+<section class="slide">
+ <div class="kicker">01 · The problem</div>
+ <h2>The landing date slips. The planner needs a new site or date — <em>today</em>.</h2>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:72px">
+  <ul class="facts">
+   <li>Today the answer means hand-merging JPL&nbsp;Horizons, QuickMap and Moon&nbsp;Trek.</li>
+   <li>Near the pole the Sun skims the horizon. Craters and ridges decide power and contact with Earth.</li>
+   <li>A bare-sphere model is not enough.</li>
+  </ul>
+  <div>
+   <div class="mono muted" style="font-size:20px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px">Bare sphere vs LOLA terrain — sunset error, median</div>
+   <div class="card" style="margin-bottom:20px"><div class="v">654<small>h</small></div><div class="k">Shackleton–de Gerlache ridge</div></div>
+   <div class="card"><div class="v">326<small>h</small></div><div class="k">Shackleton rim</div></div>
+  </div>
+ </div>
+ <div class="chrome"><span>Tilion</span><span>source: Tilion validation, group “sphere”</span></div>
+</section>
+
+<!-- 3 — Pick a site -->
+<section class="slide"><div class="split">
+ <div class="text">
+  <div class="kicker">02 · One screen</div>
+  <h2 style="font-size:64px">Pick a site and a date.</h2>
+  <ul class="facts">
+   <li>24 sites: Artemis III regions, CLPS, other nations, Apollo. Or any point 60–90°S.</li>
+   <li>Sun elevation above the terrain.</li>
+   <li>Time to the next sunset and Earthset.</li>
+   <li>Calendar of Sun and Earth windows.</li>
+  </ul>
+ </div>
+ <div class="shot"><img src="c9.jpg" alt="Polar map with landing sites"></div>
+</div><div class="chrome"><span>Tilion</span><span>polar map · site list</span></div></section>
+
+<!-- 4 — Plan a mission -->
+<section class="slide"><div class="split">
+ <div class="text">
+  <div class="kicker">03 · When the date slips</div>
+  <h2 style="font-size:64px">Find the best alternative nearby.</h2>
+  <ul class="facts">
+   <li>Set landing date, slip range and search radius.</li>
+   <li>Tilion ranks site × date alternatives by a 0–100 score: power, night survival, Earth link.</li>
+   <li>Verdict per mission limit: OK / MARGINAL / FAIL.</li>
+  </ul>
+ </div>
+ <div class="shot"><img src="c15.jpg" alt="Mission plan with ranked alternatives"></div>
+</div><div class="chrome"><span>Tilion</span><span>mission plan</span></div></section>
+
+<!-- 5 — How -->
+<section class="slide"><div class="split">
+ <div class="text">
+  <div class="kicker">04 · How it works</div>
+  <h2 style="font-size:64px">Real ephemerides. Real terrain.</h2>
+  <ul class="facts">
+   <li>Sun and Earth: NASA SPICE, DE440, frame MOON_ME, light time + aberration.</li>
+   <li>Horizon: LOLA DEM (PGDA&nbsp;90), 80&nbsp;m and 240&nbsp;m.</li>
+   <li>Sun is a 0.53° disc, not a point. Observer 2&nbsp;m above ground.</li>
+   <li>All precomputed. Static site, no server.</li>
+  </ul>
+ </div>
+ <div class="shot"><img src="c21.jpg" alt="Rover terrain profile"></div>
+</div><div class="chrome"><span>Tilion</span><span>rover waypoints · LOLA terrain profile</span></div></section>
+
+<!-- 6 — Validity -->
+<section class="slide">
+ <div class="kicker">05 · Checked against NASA — in the app</div>
+ <h2><em>138 of 142</em> checks pass. We show the 4 that fail, too.</h2>
+ <div class="grid">
+  <div class="card"><div class="v">0.000001<small>°</small></div><div class="k">Sun and Earth position vs JPL Horizons, max error</div><div class="s">tolerance 0.002° · 223 epochs · 5 sites</div></div>
+  <div class="card"><div class="v">78.33<small>% vs 78.32%</small></div><div class="k">Sunlit time vs NASA PGDA illumination map, same DEM</div><div class="s">Shackleton–de Gerlache ridge · 18.6 y</div></div>
+  <div class="card"><div class="v">99.3<small>%</small></div><div class="k">150 random polar points within 5 pp of NASA map</div><div class="s">RMSE 1.43 pp · 85–90°S</div></div>
+  <div class="card"><div class="v">10.70<small>° vs 10.65°</small></div><div class="k">Sun elevation at Apollo 11 touchdown vs ALSJ</div><div class="s">tolerance 0.3°</div></div>
+  <div class="card"><div class="v">&lt;30<small>s</small></div><div class="k">Lunar eclipse contacts vs NASA GSFC catalogue</div><div class="s">18 of 20 contacts in tolerance</div></div>
+  <div class="card"><div class="v">0.029<small>°</small></div><div class="k">Trap test: wrong frame MOON_PA is caught</div><div class="s">every known data trap has a test</div></div>
+ </div>
+ <div class="chrome"><span>Tilion</span><span>source: tilion.nedovost.org → NASA check</span></div>
+</section>
+
+<!-- 7 — Try it -->
+<section class="slide">
+ <div class="kicker">06 · Try it</div>
+ <h2 style="font-size:120px;font-family:var(--mono);font-style:normal;letter-spacing:-.01em;color:var(--red);margin-top:40px">tilion.nedovost.org</h2>
+ <p class="lead" style="margin-top:40px">Public, free, no login. Runs in the browser (WebGL).</p>
+ <div class="grid" style="margin-top:48px;gap:20px">
+  <div class="card" style="padding:24px"><div class="k" style="margin:0;color:var(--red)">Main blocker</div><div class="s">Names the ridge that steals the Sun: azimuth, distance, height, hours of light lost.</div></div>
+  <div class="card" style="padding:24px"><div class="k" style="margin:0;color:var(--red)">Sunset ± 1σ terrain</div><div class="s">Time to sunset and Earthset, with the shift from the LOLA height error layer.</div></div>
+  <div class="card" style="padding:24px"><div class="k" style="margin:0;color:var(--red)">Any point 60–90°S</div><div class="s">Click the map: the browser builds the horizon from LOLA 240 m. 3D view from the site.</div></div>
+  <div class="card" style="padding:24px"><div class="k" style="margin:0;color:var(--red)">Comms windows · DSN</div><div class="s">Dated Sun and Earth windows; Goldstone, Madrid or Canberra sees the site.</div></div>
+  <div class="card" style="padding:24px"><div class="k" style="margin:0;color:var(--red)">Survive the night</div><div class="s">Smallest battery for the dark, tilted panels, Earth eclipses, ground temperature.</div></div>
+  <div class="card" style="padding:24px"><div class="k" style="margin:0;color:var(--red)">Share the plan</div><div class="s">Slip report in plain sentences, one-page mission brief, plan as a link.</div></div>
+ </div>
+ <div style="margin-top:40px">
+  <span class="tag">NASA NAIF SPICE · DE440</span><span class="tag">LOLA DEM · PGDA 90</span><span class="tag">PGDA 69 illumination maps</span><span class="tag">JPL Horizons</span><span class="tag">GSFC eclipse catalogue</span><span class="tag">LROC</span>
+ </div>
+ <div class="chrome"><span>NASA Space Apps Challenge 2026</span><span>Tilion</span></div>
+</section>
+
+</body>
+</html>

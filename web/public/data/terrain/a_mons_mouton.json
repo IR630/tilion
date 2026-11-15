@@ -1,0 +1,16 @@
+{
+ "siteId": "a_mons_mouton",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.05434322954324934,
+ "offsetM": 4896.9404470924055,
+ "minM": 3130.785486936802,
+ "maxM": 6663.095407248009,
+ "siteHeightM": 6443.738947085047,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar80"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

@@ -1,0 +1,43 @@
+/* NASA check screen (#23, #95): verdict, readout tiles, then one bracket-framed card per check.
+   PASS = --fg with a check mark, FAIL = --red, INFO = --muted. */
+.hud-screen.validation .val-group { margin:0 0 26px; }
+.hud-screen.validation .val-group h3 { margin:18px 0 2px; font-size:15px; font-weight:500; }
+.hud-screen.validation .val-about { margin:0 0 10px; }
+.hud-screen.validation .val-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap:16px; }
+.hud-screen.validation .val-card { margin:0; padding:14px 16px; border:0; border-radius:0; min-width:0; overflow-wrap:anywhere; }
+.hud-screen.validation .val-card header { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.hud-screen.validation .val-card h4 { margin:0; font-size:13px; font-weight:500; }
+.hud-screen.validation .val-site { margin:2px 0 8px; font-family:var(--h-mono); font-size:11px; color:var(--muted); }
+.hud-screen.validation .val-card dl { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px 12px; margin:0 0 8px; }
+.hud-screen.validation .val-card dt { font-family:var(--h-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+.hud-screen.validation .val-card dd { margin:2px 0 0; font-variant-numeric:tabular-nums; font-size:13px; }
+.hud-screen.validation .val-card .val-big dd { font-size:22px; font-weight:300; line-height:1.2; }
+.hud-screen.validation .val-explanation { margin:0 0 8px; font-size:12px; color:var(--muted); }
+.hud-screen.validation .val-card a { font-family:var(--h-mono); font-size:11px; }
+.hud-screen.validation .val-pass, .hud-screen.validation .val-fail, .hud-screen.validation .val-info { flex:none; padding:0 6px; border:1px solid currentColor; border-radius:2px; font-family:var(--h-mono); font-size:11px; font-weight:400; letter-spacing:.04em; }
+.hud-screen.validation .val-pass { color:var(--fg); }
+.hud-screen.validation .val-pass::before { content:"✓ "; }
+.hud-screen.validation .val-fail { color:var(--h-red); }
+.hud-screen.validation .val-info { color:var(--muted); border-color:var(--line); }
+.hud-screen.validation .note { color:var(--muted); font-size:12px; }
+/* #246: the summary line and the fail-count button that jumps to the first FAIL card. */
+.hud-screen.validation .val-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 16px; margin:0 0 14px; }
+.hud-screen.validation .val-head .hud-verdict { margin:0; }
+.hud-screen.validation .val-jump { background:none; color:var(--h-red); border:1px solid var(--h-red); border-radius:2px; padding:2px 10px; font-family:var(--h-mono); font-size:12px; letter-spacing:.04em; cursor:pointer; }
+.hud-screen.validation .val-jump:hover { background:color-mix(in srgb, var(--h-red) 12%, transparent); }
+.hud-screen.validation .val-card[data-verdict="fail"]:focus { outline:1px solid var(--h-red); outline-offset:3px; }
+/* #337: the search field and verdict chips over the cards. */
+.hud-screen.validation .val-filter { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin:0 0 14px; }
+.hud-screen.validation .val-filter input { flex:1 1 220px; min-width:0; padding:5px 8px; background:transparent; color:var(--fg); border:1px solid var(--line); border-radius:2px; font-family:var(--h-mono); font-size:12px; }
+.hud-screen.validation .val-filter input:focus { outline:1px solid var(--fg); outline-offset:1px; }
+.hud-screen.validation .val-chips { display:flex; gap:4px; }
+.hud-screen.validation .val-chips button { background:none; color:var(--muted); border:1px solid var(--line); border-radius:2px; padding:2px 8px; font-family:var(--h-mono); font-size:11px; letter-spacing:.04em; cursor:pointer; }
+.hud-screen.validation .val-chips button[aria-pressed="true"] { color:var(--fg); border-color:var(--fg); }
+.hud-screen.validation .val-shown { margin:0; font-family:var(--h-mono); font-size:11px; color:var(--muted); }
+/* #364: big verdict, three headline numbers and the honest failed-checks line above the cards. */
+.hud-screen.validation .val-head .hud-verdict { font-size:40px; font-weight:300; line-height:1.1; }
+.hud-screen.validation .val-kpis { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap:12px; margin:0 0 12px; }
+.hud-screen.validation .val-kpi { display:flex; flex-direction:column; gap:4px; padding:12px 14px; border:0; border-radius:0; min-width:0; }
+.hud-screen.validation .val-kpi strong { font-size:28px; font-weight:300; line-height:1.2; font-variant-numeric:tabular-nums; }
+.hud-screen.validation .val-kpi-note { font-size:11px; color:var(--muted); }
+.hud-screen.validation .val-failed { margin:0 0 14px; font-size:13px; color:var(--h-red); overflow-wrap:anywhere; }

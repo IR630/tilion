@@ -1,0 +1,63 @@
+/* #95 HUD layout shared by the screens: verdict line, readout tiles, bracket frame, control bar, notes.
+   Colours and fonts come only from the #94 tokens in styles.css. */
+.hud-screen {
+  --h-dim: var(--dim);
+  --h-line-strong: var(--line-strong);
+  --h-red: var(--red);
+  --h-blue: var(--blue);
+  --h-warn: var(--warn);
+  --h-mono: var(--font-mono);
+  --h-br: var(--fg);
+}
+
+/* Text roles */
+.hud-screen .hud-label { font-family:var(--h-mono); font-size:11px; font-weight:400; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+.hud-screen .hud-title { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; margin:0 0 10px; }
+.hud-screen .hud-title h2 { margin:0; font-size:15px; font-weight:500; letter-spacing:0; }
+.hud-screen .hud-verdict, .hud-screen p.bottleneck { margin:0 0 14px; font-size:20px; font-weight:300; line-height:1.3; color:var(--fg); }
+
+/* Readout tiles: mono caps label on top, a large light number below */
+.hud-screen .hud-tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px, 1fr)); gap:0; margin:0 0 16px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.hud-screen .hud-tile { position:relative; margin:0; padding:10px 14px 12px; min-width:0; border-left:1px solid var(--line); }
+.hud-screen .hud-tile:first-child { border-left:0; padding-left:0; }
+.hud-screen .hud-tile > .hud-label { display:block; margin-bottom:4px; }
+.hud-screen .hud-value { display:block; font-size:26px; font-weight:300; line-height:1.15; font-variant-numeric:tabular-nums; color:var(--fg); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.hud-screen .hud-value small { font-size:13px; color:var(--muted); margin-left:4px; }
+.hud-screen .hud-foot { display:block; margin-top:3px; font-family:var(--h-mono); font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.hud-screen .hud-sun { color:var(--sun); }
+.hud-screen .hud-earth { color:var(--earth); }
+.hud-screen .hud-bad { color:var(--h-red); }
+
+/* Frame: a plain hairline box (#155: corner brackets carried no information). */
+.hud-screen .hud-frame { position:relative; padding:10px 12px; margin:0 0 12px; background:var(--bg); border:1px solid var(--line); }
+.hud-screen .hud-corners { display:flex; justify-content:space-between; gap:8px 24px; flex-wrap:wrap; font-family:var(--h-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-variant-numeric:tabular-nums; }
+.hud-screen .hud-corners > * { display:flex; flex-wrap:wrap; gap:4px 18px; align-items:center; }
+.hud-screen .hud-corners b { font-weight:400; color:var(--fg); }
+.hud-screen .hud-key { display:inline-block; width:14px; height:0; margin-right:6px; vertical-align:middle; border-top:2px solid var(--sun); }
+.hud-screen .hud-key.hud-key-earth { border-top:1px dashed var(--earth); }
+.hud-screen .hud-key.hud-key-dot { width:5px; height:5px; border:0; border-radius:50%; background:var(--sun); }
+
+/* One compact control bar */
+.hud-screen .hud-bar { display:flex; flex-wrap:wrap; align-items:center; gap:8px 18px; margin:0 0 12px; padding:6px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); font-family:var(--h-mono); font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.hud-screen .hud-bar label { display:inline-flex; align-items:center; gap:6px; cursor:pointer; }
+.hud-screen .hud-seg { display:inline-flex; align-items:center; gap:0; }
+.hud-screen .hud-seg > .hud-label { margin-right:8px; }
+.hud-screen .hud-bar button:where(:not(.info-mark)), .hud-screen .hud-seg button:where(:not(.info-mark)) { background:none; color:var(--muted); border:1px solid var(--line); border-radius:2px; padding:3px 10px; font-family:var(--h-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; cursor:pointer; }
+.hud-screen .hud-seg button:where(:not(.info-mark)) + button { border-left:0; }
+.hud-screen .hud-bar button:where(:not(.info-mark)):hover:not(:disabled) { color:var(--fg); border-color:var(--h-line-strong); }
+.hud-screen .hud-bar button:where(:not(.info-mark))[aria-pressed="true"] { color:var(--fg); border-color:var(--h-blue); box-shadow:inset 0 -2px 0 var(--h-blue); }
+.hud-screen .hud-bar button:where(:not(.info-mark)):disabled { opacity:.4; cursor:default; }
+.hud-screen .hud-bar select, .hud-screen .hud-bar input[type="number"] { background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:2px; padding:2px 4px; font:inherit; }
+.hud-screen .hud-bar input[type="radio"] { accent-color:var(--h-blue); margin:0; }
+.hud-screen .hud-bar input[type="range"] { accent-color:var(--h-blue); }
+.hud-screen .hud-sep { width:1px; align-self:stretch; background:var(--line); }
+
+/* Explanations and sources: collapsed, small, at the bottom */
+.hud-screen details.hud-notes { margin:16px 0 0; font-size:12px; color:var(--muted); max-width:110ch; }
+.hud-screen details.hud-notes summary { cursor:pointer; font-family:var(--h-mono); font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+.hud-screen details.hud-notes summary:hover { color:var(--fg); }
+.hud-screen details.hud-notes > *:not(summary) { margin:6px 0 0; }
+.hud-screen details.hud-notes ul { padding-left:16px; }
+.hud-screen .stub { color:var(--h-warn); font-family:var(--h-mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+.hud-screen a { color:var(--h-blue); }
+.hud-screen :focus-visible { outline:1px solid var(--h-blue); outline-offset:2px; }

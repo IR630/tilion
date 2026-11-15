@@ -1,0 +1,96 @@
+/* Welcome screen (#158): a separate first screen, shown once. It lies over the globe, the navigator
+   chrome (rail, panels, controls, time dock) is hidden under it and fades in on "Open navigator".
+   A left column: name, what it computes, three ways in, live numbers. Tokens only (#94). */
+.globe-stage { container-type:size; }
+.hero { position:absolute; inset:0; z-index:45; display:flex; flex-direction:column; justify-content:space-between; gap:24px; padding:clamp(28px, 6vh, 72px) clamp(20px, 5vw, 72px) clamp(24px, 5vh, 56px);
+  background:linear-gradient(90deg, var(--bg) 0, color-mix(in srgb, var(--bg) 82%, transparent) 30%, transparent 58%);
+  pointer-events:none; animation:hero-in .45s ease-out; transition:opacity .35s ease, transform .35s ease; }
+.hero > * { pointer-events:auto; width:min(520px, 100%); }
+.hero.is-solid { background:var(--bg); }
+.hero.is-leaving { opacity:0; transform:translateX(-12px); pointer-events:none; }
+.hero.is-leaving > * { pointer-events:none; }
+@keyframes hero-in { from { opacity:0; transform:translateX(-12px); } }
+.hero-title { margin:0; font-size:clamp(52px, 7.5vw, 112px); color:var(--fg); white-space:nowrap; }
+.hero-sub { margin:14px 0 0; font-family:var(--font-mono); font-size:12px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; color:var(--fg); }
+.hero-sub em { font-style:normal; color:var(--red, var(--sun)); }
+.hero-lead { margin:22px 0 0; max-width:440px; font-size:15px; line-height:1.55; color:var(--muted); }
+.hero-foot { display:flex; flex-direction:column; gap:20px; }
+.hero-cta { margin-top:22px; display:flex; flex-wrap:wrap; gap:10px; }
+.hero-enter, .hero-plan { padding:13px 22px; border-radius:0; font-family:var(--font-mono); font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; transition:filter .12s, border-color .12s, background-color .12s; }
+.hero-enter { background:var(--red, var(--sun)); border:1px solid var(--red, var(--sun)); color:var(--bg); }
+.hero-enter:hover { filter:brightness(1.12); }
+.hero-plan { background:color-mix(in srgb, var(--bg) 60%, transparent); border:1px solid var(--line-strong); color:var(--fg); }
+.hero-plan:hover { border-color:var(--fg); }
+.hero-enter:focus-visible, .hero-plan:focus-visible { outline:1px solid var(--fg); outline-offset:3px; }
+.hero-stats { display:grid; grid-template-columns:repeat(3, 1fr); margin:0; border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line); }
+.hero-stats > div { padding:10px 14px 9px 0; min-width:0; }
+.hero-stats > div + div { padding-left:14px; border-left:1px solid var(--line); }
+.hero-stats dt { font-family:var(--font-mono); font-size:9.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+.hero-stats dd { margin:4px 0 0; font-family:var(--font-ui); font-size:clamp(22px, 2.4vw, 32px); font-weight:300; line-height:1; color:var(--fg); font-variant-numeric:tabular-nums; }
+.hero-stats small { margin-left:6px; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; color:var(--muted); }
+/* #210, #398: labels wrap instead of "SUN ABOVE TERRA…"; the site name is in the line under the stats. */
+.hero-at { display:flex; flex-wrap:wrap; gap:2px 12px; margin:-8px 0 0; font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; color:var(--dim); }
+@media (max-width: 760px) {
+  .hero { overflow-y:auto; pointer-events:auto; background:color-mix(in srgb, var(--bg) 78%, transparent); }
+  .hero-sub { letter-spacing:.04em; font-size:10px; }
+  /* #450: the Sun and Earth tags of the globe lie on the hero text; the build stamp goes to the top. */
+  .app.is-intro .globe-tags { display:none; }
+  .app.is-intro .build-label { top:2px; bottom:auto; }
+}
+@media (prefers-reduced-motion: reduce) { .hero { animation:none; transition:none; } .hero-enter, .hero-plan { transition:none; } }
+
+/* Under the welcome screen the navigator chrome is hidden and out of the tab order (inert in App). */
+.rail, .hud, .navigator { transition:opacity .35s ease, visibility .35s; }
+.app.is-intro .rail, .app.is-intro .hud, .app.is-intro .navigator,
+.app.is-intro .globe-stage .globe.hud-screen > :not(.scene3d-frame), .app.is-intro .globe-stage .globe.hud-screen .scene3d-frame > :not(.terrain3d-view) { opacity:0; visibility:hidden; }
+@media (prefers-reduced-motion: reduce) { .rail, .hud, .navigator { transition:none; } }
+.navigator.is-globe .hud-bl { display:none; }
+
+/* The globe stays clean (user 15.11 02:05: "огромная легенда налезает на карту"): no legend box;
+   the readouts and controls are small mono lines at the top right. */
+.globe-stage.globe-stage .globe.hud-screen .terrain3d-legend { display:none; }
+/* Selected-site readout and the globe controls stay, as small mono lines without boxes. */
+.globe-stage.globe-stage .globe.hud-screen .hud-frame { border:0; background:none; }
+.globe-stage.globe-stage .globe.hud-screen .scene3d-selected { width:auto; max-width:min(300px, 22cqw); margin:0; padding:0; background:none; border:0; text-align:right; font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; color:var(--muted); text-shadow:0 0 6px var(--bg); }
+.globe-stage.globe-stage .globe.hud-screen .scene3d-selected b { color:var(--fg); font-weight:500; }
+.globe-stage.globe-stage .globe.hud-screen .terrain3d-controls { width:auto; max-width:min(300px, 22cqw); flex-direction:column; align-items:flex-end; gap:14px; margin:0; padding:0; background:none; border:0; font-size:9.5px; letter-spacing:.04em; color:var(--muted); }
+.globe-stage.globe-stage .globe.hud-screen .terrain3d-controls label { flex-direction:row; align-items:center; gap:6px; }
+.globe-stage.globe-stage .globe.hud-screen .terrain3d-controls input[type="range"] { width:90px; }
+.globe-stage.globe-stage .globe.hud-screen .terrain3d-controls select { max-width:170px; padding:1px 4px; font-size:10px; }
+.globe-stage.globe-stage .globe.hud-screen { padding-top:24px; padding-right:24px; }
+.globe-stage.globe-stage .globe.hud-screen .scene3d-status,
+.globe-stage.globe-stage .globe.hud-screen .terrain3d-hint { width:auto; max-width:min(300px, 22cqw); padding:0; background:none; border:0; text-align:right; font-family:var(--font-mono); font-size:10px; letter-spacing:.02em; color:var(--muted); text-shadow:0 0 6px var(--bg); }
+.globe-stage.globe-stage .globe.hud-screen .terrain3d-hint { font-size:9px; letter-spacing:.06em; text-transform:none; color:var(--dim); }
+/* The rail logo reopens the welcome screen. */
+.rail .rail-mark { padding:0; background:none; border:0; border-radius:0; cursor:pointer; transition:color .15s; }
+.rail .rail-mark:hover { color:var(--fg); }
+.rail .rail-mark:focus-visible { outline:1px solid var(--fg); outline-offset:2px; }
+.app.is-intro .dock { background:var(--bg); }
+.globe-stage.globe-stage .globe.hud-screen .globe-sources summary { cursor:pointer; color:var(--muted); list-style:none; }
+.globe-stage.globe-stage .globe.hud-screen .globe-sources summary::-webkit-details-marker { display:none; }
+/* #197: the selected site opens its Horizon view from the globe (the place card lives on the map). */
+.globe-stage.globe-stage .globe.hud-screen .globe-horizon-btn { display:block; margin:6px 0 0 auto; padding:5px 10px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--surface); color:var(--fg); font:inherit; text-transform:uppercase; letter-spacing:.06em; cursor:pointer; text-shadow:none; }
+.globe-stage.globe-stage .globe.hud-screen .globe-horizon-btn:hover { border-color:var(--fg); }
+/* #197 phone: the readouts are one full-width strip at the bottom of the globe, not a 22 % column. */
+@media (max-width: 760px) {
+  .globe-stage.globe-stage .globe.hud-screen { justify-content:flex-end; align-items:stretch; padding:0 8px 8px; }
+  .globe-stage.globe-stage .globe.hud-screen .scene3d-frame { width:auto; }
+  /* #207: the globe draws above the Selected and relief panels, so the south-pole site marker is not under them.
+     #347: the canvas is a flex item that takes the height left above the panels (not a fixed 150 px),
+     so with a taller dock (Hide panels, Thermal) the globe still ends above the panels; folded panels give it the room. */
+  .app:not(.is-intro) .globe-stage.globe-stage .globe.hud-screen .scene3d-frame { flex:1 1 auto; min-height:0; }
+  .app:not(.is-intro) .globe-stage.globe-stage .globe.hud-screen .terrain3d-view { position:relative; inset:auto; flex:1 1 0; min-height:0; margin:0 -8px; }
+  .globe-stage.globe-stage .globe.hud-screen .scene3d-status { display:none; }
+  .globe-stage.globe-stage .globe.hud-screen .scene3d-selected,
+  .globe-stage.globe-stage .globe.hud-screen .terrain3d-controls { max-width:none; padding:8px 10px; background:var(--surface); border:1px solid var(--line); text-align:left; }
+  .globe-stage.globe-stage .globe.hud-screen .terrain3d-controls { flex-direction:row; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px 12px; }
+  .globe-stage.globe-stage .globe.hud-screen .terrain3d-controls input[type="range"] { width:64px; }
+  .globe-stage.globe-stage .globe.hud-screen .terrain3d-controls select, .globe-stage.globe-stage .globe.hud-screen .terrain3d-controls [role="combobox"] { max-width:150px; }
+  .globe-stage.globe-stage .globe.hud-screen .globe-horizon-btn { display:inline-block; margin:6px 0 0; }
+}
+/* #271: proof strip under the lead — numbers from validation.json, not marketing copy. */
+.hero-proof { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin:22px 0 0; }
+.hero-proof > div { display:flex; flex-direction:column-reverse; gap:4px; padding-left:10px; border-left:2px solid var(--red, var(--sun)); }
+.hero-proof dd { margin:0; font-family:var(--font-ui); font-size:clamp(17px, 1.7vw, 22px); font-weight:400; color:var(--fg); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.hero-proof dt { font-size:11.5px; line-height:1.35; color:var(--muted); }
+@media (max-width: 760px) { .hero-proof { grid-template-columns:1fr; gap:8px; } }

@@ -1,0 +1,16 @@
+{
+ "siteId": "im2_athena",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.0222627822811178,
+ "offsetM": 5218.640087216743,
+ "minM": 4495.099663080415,
+ "maxM": 5942.180511353072,
+ "siteHeightM": 5321.329573497816,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar80"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

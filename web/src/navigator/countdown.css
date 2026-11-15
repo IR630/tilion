@@ -1,0 +1,19 @@
+.countdown { background:none; border:0; padding:4px 0; color:inherit; font:inherit; text-align:left; cursor:pointer; }
+.countdown span { display:block; font-size:11px; }
+.countdown.red { color:var(--red); }
+.countdown.yellow { color:var(--warn); }
+.countdown.green { color:var(--fg); }
+.countdown:disabled { cursor:default; }
+.countdown:not(:disabled):hover { text-decoration:underline; }
+
+/* #397: centred in the gap between the left column (rail + 12 + 420 px) and the place card (360 + 12 px):
+   50 % + (496 − 372) / 2. At 1280 px the strip clears both. */
+.status-strip { position:absolute; z-index:7; top:12px; left:calc(50% + 62px); transform:translateX(-50%); display:flex; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); }
+.status-card { display:flex; flex-direction:column; gap:1px; min-width:132px; padding:8px 12px; border-top:2px solid transparent; font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.status-card + .status-card { border-left:1px solid var(--line); }
+.status-card b { font-size:17px; font-weight:300; color:var(--fg); }
+.status-k { font-family:var(--font-mono); font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; }
+.status-card.sun.on { border-top-color:var(--sun); } .status-card.sun.on .status-k { color:var(--sun); }
+.status-card.earth.on { border-top-color:var(--earth); } .status-card.earth.on .status-k { color:var(--earth); }
+.status-card.dsn.on { border-top-color:var(--accent); } .status-card.dsn.on .status-k { color:var(--accent); }
+@media (max-width: 900px) { .status-strip { display:none; } }

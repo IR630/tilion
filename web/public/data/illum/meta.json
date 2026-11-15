@@ -1,0 +1,63 @@
+{
+ "what": "mean over 18.6 years (Mazarico et al. 2011, PGDA 69): sun = visible fraction of the solar disc, earth = share of time any part of Earth is visible; uint8 percent, 255 = no data",
+ "projection": "south polar stereographic, R = 1737.4 km, row 0 = +y (lon 0E), col 0 = -x",
+ "nodata": 255,
+ "grids": [
+  {
+   "id": "sun85",
+   "kind": "sun",
+   "file": "sun85.u8.gz",
+   "size": 1264,
+   "bounds": [
+    -151680.0,
+    -151680.0,
+    151680.0,
+    151680.0
+   ],
+   "cellM": 240.0,
+   "source": "AVGVISIB_85S_060M_201608.TIF, https://pgda.gsfc.nasa.gov/products/69"
+  },
+  {
+   "id": "earth85",
+   "kind": "earth",
+   "file": "earth85.u8.gz",
+   "size": 1264,
+   "bounds": [
+    -151680.0,
+    -151680.0,
+    151680.0,
+    151680.0
+   ],
+   "cellM": 240.0,
+   "source": "AVGVISIB_85S_060M_201608_EARTH.TIF, https://pgda.gsfc.nasa.gov/products/69"
+  },
+  {
+   "id": "sun65",
+   "kind": "sun",
+   "file": "sun65.u8.gz",
+   "size": 1605,
+   "bounds": [
+    -770400.0,
+    -770400.0,
+    770400.0,
+    770400.0
+   ],
+   "cellM": 960.0,
+   "source": "AVGVISIB_65S_240M_201608.TIF, https://pgda.gsfc.nasa.gov/products/69"
+  },
+  {
+   "id": "earth65",
+   "kind": "earth",
+   "file": "earth65.u8.gz",
+   "size": 1605,
+   "bounds": [
+    -770400.0,
+    -770400.0,
+    770400.0,
+    770400.0
+   ],
+   "cellM": 960.0,
+   "source": "AVGVISIB_65S_240M_201608_EARTH.TIF, https://pgda.gsfc.nasa.gov/products/69"
+  }
+ ]
+}

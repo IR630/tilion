@@ -1,0 +1,16 @@
+{
+ "siteId": "a_nobile_rim_2",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.03555991077812102,
+ "offsetM": 644.7362823756412,
+ "minM": -510.960817913292,
+ "maxM": 1800.4333826645743,
+ "siteHeightM": 819.8884139070869,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar80"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

@@ -1,0 +1,158 @@
+/* Time dock (#58, #158): a full-width bar under the stage. The map ends above it, so nothing of
+   the time UI covers the map. Colours come only from the :root variables in styles.css. */
+.app { --sheet-h:0px; }
+.dock { flex:none; position:relative; z-index:25; }
+
+.hud { --mono:var(--font-mono, ui-monospace, "SFMono-Regular", Menlo, monospace); --dim-c:var(--dim, var(--muted)); --legend-w:176px;
+  position:relative; z-index:25; flex:none; width:100%; padding:6px 12px 6px 0; background:var(--panel); border-top:1px solid var(--line); color:var(--fg); font-variant-numeric:tabular-nums; }
+.hud button { font:inherit; }
+
+/* The track: the legend gutter (site, Sun-lit, Earth in view) beside the canvas rows it names. */
+.hud-band { position:relative; display:grid; grid-template-columns:var(--legend-w) minmax(0, 1fr); height:62px; }
+.hud-track { position:relative; min-width:0; }
+.hud-legend { position:relative; font-family:var(--mono); font-size:9.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
+.hud-legend > span { position:absolute; left:14px; right:12px; overflow:hidden; text-overflow:ellipsis; line-height:12px; }
+.hud-legend-site { top:3px; color:var(--fg); text-transform:none; letter-spacing:0; font-family:var(--font-ui); font-size:11.5px; font-weight:500; }
+.hud-legend-k { display:flex; align-items:center; gap:6px; }
+.hud-legend-k.k-sun { top:16px; } .hud-legend-k.k-earth { top:25px; }
+.hud-legend-k i { width:14px; height:6px; flex:none; }
+.hud-legend-k.k-sun i { background:var(--sun); } .hud-legend-k.k-earth i { background:var(--earth); }
+/* #313: the T key opens the date picker; no keyboard on touch screens, so no hint there. */
+.hud-legend-hint { top:41px; display:flex; align-items:center; gap:6px; color:var(--dim-c); }
+/* #461: SET DATE is a button: same look, a pointer and a focus ring. */
+button.hud-legend-hint { position:absolute; left:14px; max-width:calc(100% - 26px); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; background:none; border:0; padding:0; margin:0; font-family:var(--mono); font-size:9.5px; letter-spacing:.04em; text-transform:uppercase; line-height:12px; cursor:pointer; text-align:left; }
+button.hud-legend-hint:hover { color:var(--fg); }
+button.hud-legend-hint:focus-visible { outline:1px solid var(--accent, var(--fg)); outline-offset:2px; }
+/* #461: the exact moment over the playhead, above the strip so it never meets the scale numbers. */
+/* #484: a bright orange tag (the Horizon chart time tag style) centred on the notch: its bottom
+   edge sits on the canvas top, where the playhead triangle starts. */
+.hud-band { margin-top:18px; }
+.hud-now { position:absolute; z-index:1; left:calc(50% + .5px); bottom:100%; transform:translateX(-50%); padding:1px 6px; background:var(--sun); color:#0b0b0c; font-family:var(--mono); font-size:10.5px; font-weight:600; line-height:14px; letter-spacing:.04em; white-space:nowrap; pointer-events:none; }
+.hud-legend-hint kbd { min-width:14px; height:14px; display:inline-grid; place-items:center; border:1px solid var(--line-strong, var(--line)); font:500 9px/1 var(--mono); color:var(--muted); }
+@media (hover: none) { .hud-legend-hint { display:none; } }
+
+/* Row under the scale (#298): the next events right; the recorder chip (?rec=1) left of them. */
+.hud-row { display:flex; justify-content:flex-end; align-items:center; gap:12px; padding:2px 0 0 var(--legend-w); }
+/* #313, #317: 6 px padding + 12 px margin = 18 px under the next events; the build stamp (fixed,
+   bottom right, styles.css) tops out 15 px above the edge, so it stays off "Sunset in". */
+.hud-right { display:flex; flex-direction:column; align-items:flex-end; gap:1px; min-width:0; margin-bottom:12px; }
+/* Canvas recorder (?rec=1). */
+.hud-rec:empty { display:none; }
+.hud-rec { display:inline-flex; align-items:center; gap:6px; font-size:11px; }
+.hud-rec button { background:var(--bg); border:1px solid var(--line); border-radius:0; color:var(--fg); font-family:var(--mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; padding:3px 8px; cursor:pointer; }
+.hud-rec button[aria-pressed="true"] { border-color:var(--sun); color:var(--sun); }
+.hud-rec [role="alert"] { color:var(--sun); max-width:180px; white-space:normal; font-family:var(--mono); font-size:10px; }
+
+.hud-next { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
+.hud-next b { color:var(--fg); font-weight:500; }
+.hud-next.is-first { color:var(--fg); }
+.hud-next svg { width:12px; height:12px; }
+.hud-next.k-sunrise svg, .hud-next.k-sunset svg { color:var(--sun); }
+.hud-next.k-earthrise svg, .hud-next.k-earthset svg { color:var(--earth); }
+.hud-err { font-family:var(--mono); font-size:10px; color:var(--sun); text-transform:uppercase; }
+/* #369: the Earth eclipse of the focused site, left of the next events; the dot = its pin on the strip. */
+.hud-eclipse { display:flex; align-items:center; gap:8px; min-width:0; margin:0 auto 12px 14px; font-family:var(--mono); font-size:10px; letter-spacing:.04em; color:var(--fg); white-space:nowrap; }
+.hud-eclipse i { width:7px; height:7px; flex:none; border-radius:50%; background:var(--warn); }
+.hud-eclipse-text { overflow:hidden; text-overflow:ellipsis; }
+.hud-eclipse a { flex:none; color:var(--warn); text-transform:uppercase; text-decoration:none; border-bottom:1px solid currentColor; }
+.hud-eclipse a:hover, .hud-eclipse a:focus-visible { color:var(--fg); }
+
+.hud-canvas { position:relative; display:block; cursor:grab; touch-action:none; outline:none; }
+.hud-canvas:focus-visible { box-shadow:0 1px 0 0 var(--earth); }
+
+/* Date picker popover: flat panel, 1 px line, days in greys by window quality (lighter = better),
+   tinted by --sun / --earth when one of them dominates. */
+.dp { --mono:var(--font-mono, ui-monospace, "SFMono-Regular", Menlo, monospace); position:absolute; z-index:2; left:50%; bottom:calc(100% + 8px); transform:translateX(-50%); width:min(600px, calc(100vw - 24px)); padding:14px 16px 12px; background:var(--panel); border:1px solid var(--line); border-radius:0; color:var(--fg); text-shadow:none; animation:dp-in .14s ease-out; }
+@keyframes dp-in { from { opacity:0; transform:translate(-50%, 4px); } }
+.dp-head { display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:start; margin-bottom:10px; }
+.dp-eyebrow { margin:0; font-family:var(--mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+.dp-site { margin:2px 0 0; font-size:14px; font-weight:500; max-width:210px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dp-nav { display:flex; gap:2px; }
+.dp-nav button { width:26px; height:26px; display:grid; place-items:center; border-radius:0; background:none; border:1px solid var(--line); color:var(--fg); cursor:pointer; }
+.dp-nav button:hover:not(:disabled) { border-color:var(--fg); }
+.dp-nav button:disabled { opacity:.3; cursor:default; }
+.dp-months { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.dp-month-name { margin:0 0 6px; text-align:center; font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; }
+.dp-grid { display:grid; grid-template-columns:repeat(7, 1fr); gap:2px; }
+.dp-wd { text-align:center; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; color:var(--muted); padding-bottom:2px; text-transform:uppercase; }
+.dp-day { --q:color-mix(in srgb, var(--fg) calc(12% + var(--share, 0) * 70%), var(--panel)); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; height:34px; padding:0; border:1px solid transparent; border-radius:0; cursor:pointer; background:var(--q); color:var(--fg); font-variant-numeric:tabular-nums; transition:border-color .1s; }
+.dp-num { font-size:12px; font-weight:500; line-height:1.1; }
+.dp-val { font-family:var(--mono); font-size:9px; opacity:.7; line-height:1.1; }
+.dp-day.q-both { color:var(--bg); }
+.dp-day.q-sun { background:color-mix(in srgb, var(--sun) 32%, var(--panel)); }
+.dp-day.q-earth { background:color-mix(in srgb, var(--earth) 32%, var(--panel)); }
+.dp-day.q-poor { background:color-mix(in srgb, var(--fg) 6%, var(--panel)); color:var(--muted); }
+.dp-day.q-none { background:none; color:var(--muted); }
+.dp-day:hover:not(:disabled) { border-color:var(--fg); }
+.dp-day.is-off { opacity:.25; cursor:default; }
+.dp-day.in-slip { box-shadow:inset 0 -1px 0 var(--muted); }
+.dp-day.is-original { outline:1px dashed var(--muted); outline-offset:-4px; }
+.dp-day.is-moment::after { content:""; position:absolute; top:3px; right:3px; width:3px; height:3px; background:currentColor; }
+.dp-day.is-landing { border-color:var(--earth); box-shadow:0 0 0 1px var(--earth); z-index:1; }
+.dp-foot { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; margin-top:12px; padding-top:10px; border-top:1px solid var(--line); }
+.dp-legend { display:flex; flex-wrap:wrap; gap:4px 12px; margin:0; padding:0; list-style:none; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); align-items:center; }
+.dp-legend li { display:flex; align-items:center; gap:5px; }
+.dp-legend i { width:10px; height:10px; display:inline-block; }
+.dp-legend .q-both { background:color-mix(in srgb, var(--fg) 75%, var(--panel)); } .dp-legend .q-sun { background:color-mix(in srgb, var(--sun) 32%, var(--panel)); } .dp-legend .q-earth { background:color-mix(in srgb, var(--earth) 32%, var(--panel)); } .dp-legend .q-poor { background:color-mix(in srgb, var(--fg) 6%, var(--panel)); border:1px solid var(--line); }
+.dp-legend-num { flex-basis:100%; text-transform:none; letter-spacing:0; font-family:inherit; }
+.dp-exact { display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+.dp-exact button { background:none; border:1px solid var(--line); color:var(--fg); border-radius:0; padding:4px 10px; cursor:pointer; font-family:var(--mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; }
+.dp-type { display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; margin:0 0 12px; padding:8px 10px; border:1px solid var(--line); font-family:var(--mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+.dp-type label { display:flex; align-items:center; gap:8px; }
+.dp-type input { background:var(--bg); color:var(--fg); border:1px solid var(--line-strong); border-radius:0; padding:5px 8px; color-scheme:dark; font-family:var(--mono); font-size:13px; letter-spacing:.02em; }
+.dp-type input:focus { outline:none; border-color:var(--fg); }
+.dp-type input[aria-invalid="true"] { border-color:var(--warn); }
+.dp-hour { display:flex; align-items:center; gap:4px; }
+.dp-hour button { width:24px; height:28px; display:grid; place-items:center; padding:0; background:none; border:1px solid var(--line); border-radius:0; color:var(--fg); cursor:pointer; }
+.dp-hour button:hover { border-color:var(--fg); }
+.dp-hour .dp-hour-input { width:3.2ch; box-sizing:content-box; text-align:center; font-variant-numeric:tabular-nums; }
+.dp-hour > span:first-child { margin-right:4px; }
+.dp-type-hint { text-transform:none; letter-spacing:0; font-size:11px; }
+.dp-exact button:hover { border-color:var(--fg); }
+.dp-exact .dp-done { border-color:var(--fg); }
+
+@media (max-width: 1100px) {
+  .hud-right { display:none; }
+}
+@media (max-width: 760px) {
+  /* #207: phone dock. The site name gets its own line over the strip; the keys keep a short gutter
+     (Sun / Earth); nothing is clipped. */
+  /* #297: 18 px under the dock keep the build stamp (fixed, bottom right) off the scale. */
+  .hud { --legend-w:58px; padding:4px 8px 18px; }
+  .hud-band { margin-top:18px; }
+  .hud-legend > span { left:0; right:4px; }
+  .hud-legend-site { top:-14px; right:auto; width:calc(100vw - 16px); }
+  .hud-legend-k .k-long { display:none; }
+  .hud-legend-hint { display:none; }
+  .hud-now { left:auto; right:0; transform:none; }
+  .hud-row { justify-content:center; padding-left:0; }
+  .hud-eclipse { margin:0 0 4px; }
+  .dp-months { grid-template-columns:1fr; }
+  .dp-month + .dp-month { display:none; }
+  .app .nav-attrib { display:none; }
+}
+
+/* #196: next Sun-lit and Earth-in-view windows (place card). One row per body, start – end UTC, duration. */
+.nwin { margin:12px 0 0; border:1px solid var(--line); padding:8px 10px 6px; font-family:var(--font-mono); font-size:11px; font-variant-numeric:tabular-nums; }
+.nwin-head { margin:0 0 6px; font-family:var(--font-mono); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--fg); }
+.nwin-head span { text-transform:none; letter-spacing:.02em; }
+/* #207: compact variant (Horizon view, Windows panel): Sun and Earth side by side. */
+.nwin.is-compact { display:grid; grid-template-columns:1fr 1fr; column-gap:18px; margin:0 0 12px; }
+.nwin.is-compact .nwin-head { grid-column:1 / -1; }
+/* #210 phone: one column, so a window and its "continues to" line read on one line each. */
+@media (max-width: 760px) { .nwin.is-compact { grid-template-columns:1fr; } .nwin.is-compact .nwin-row + .nwin-row { border-top:1px solid var(--line); } }
+.nwin.is-compact .nwin-row + .nwin-row { border-top:0; }
+.nwin-head span { color:var(--muted); font-weight:400; }
+.nwin-row { padding:4px 0; }
+.nwin-row + .nwin-row { border-top:1px solid var(--line); }
+.nwin-k { display:flex; align-items:center; gap:6px; font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+.nwin-k i { width:10px; height:3px; background:var(--muted); }
+.nwin-row.k-sun .nwin-k i { background:var(--sun); }
+.nwin-row.k-earth .nwin-k i { background:var(--earth); }
+.nwin ul { list-style:none; margin:0; padding:0; }
+.nwin li button { display:flex; justify-content:space-between; gap:10px; width:100%; padding:2px 0; background:none; border:0; color:var(--fg); font:inherit; text-align:left; cursor:pointer; }
+.nwin li button:disabled { cursor:default; opacity:1; color:var(--fg); }
+.nwin li button:not(:disabled):hover { text-decoration:underline; }
+.nwin li button b { font-weight:500; color:var(--muted); white-space:nowrap; }
+.nwin-cont { display:block; font-size:10px; color:var(--muted); }
+.nwin-none, .nwin-more { color:var(--muted); padding:2px 0; display:block; }

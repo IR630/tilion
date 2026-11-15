@@ -1,0 +1,16 @@
+{
+ "siteId": "chandrayaan2_crash",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.010328658010642259,
+ "offsetM": 837.4426224407507,
+ "minM": 501.7612370948773,
+ "maxM": 1173.1240077866241,
+ "siteHeightM": 836.1575576945324,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar240"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

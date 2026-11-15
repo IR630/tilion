@@ -1,0 +1,298 @@
+{
+ "version": 1,
+ "startUtc": "2026-12-01T00:00:00Z",
+ "endUtc": "2028-01-01T00:00:00Z",
+ "hours": 9505,
+ "sigma": "LOLA height error, 1 sigma, from the PGDA 90 error layer (LDEM_*_ADJ_ERR) at the terrain point that sets the horizon; the whole horizon raised or lowered together",
+ "method": "atan(sigma / distance)",
+ "sites": [
+  {
+   "siteId": "cr1_connecting_ridge",
+   "name": "Shackleton\u2013de Gerlache ridge (C1, 2 m)",
+   "sigmaMedianM": 0.18,
+   "errMaxDeg": 0.221,
+   "sun": {
+    "value": 0.9295,
+    "lo": 0.9262,
+    "hi": 0.9337
+   },
+   "earth": {
+    "value": 0.506,
+    "lo": 0.506,
+    "hi": 0.506
+   }
+  },
+  {
+   "siteId": "shackleton_rim",
+   "name": "Shackleton rim (S)",
+   "sigmaMedianM": 0.1,
+   "errMaxDeg": 0.102,
+   "sun": {
+    "value": 0.8954,
+    "lo": 0.8934,
+    "hi": 0.8981
+   },
+   "earth": {
+    "value": 0.491,
+    "lo": 0.491,
+    "hi": 0.491
+   }
+  },
+  {
+   "siteId": "de_gerlache_rim_gr1",
+   "name": "de Gerlache rim (GR1)",
+   "sigmaMedianM": 0.19,
+   "errMaxDeg": 0.272,
+   "sun": {
+    "value": 0.5743,
+    "lo": 0.5512,
+    "hi": 0.5971
+   },
+   "earth": {
+    "value": 0.4956,
+    "lo": 0.494,
+    "hi": 0.4979
+   }
+  },
+  {
+   "siteId": "a_peak_cabeus_b",
+   "name": "Peak near Cabeus B (PCB03)",
+   "sigmaMedianM": 0.33,
+   "errMaxDeg": 0.504,
+   "sun": {
+    "value": 0.54,
+    "lo": 0.5349,
+    "hi": 0.5447
+   },
+   "earth": {
+    "value": 0.7006,
+    "lo": 0.6959,
+    "hi": 0.7055
+   }
+  },
+  {
+   "siteId": "a_haworth",
+   "name": "Haworth (HW02)",
+   "sigmaMedianM": 0.17,
+   "errMaxDeg": 0.151,
+   "sun": {
+    "value": 0.4521,
+    "lo": 0.4366,
+    "hi": 0.4647
+   },
+   "earth": {
+    "value": 0.505,
+    "lo": 0.5003,
+    "hi": 0.5091
+   }
+  },
+  {
+   "siteId": "a_malapert_massif",
+   "name": "Malapert Massif (MMA01)",
+   "sigmaMedianM": 0.18,
+   "errMaxDeg": 0.177,
+   "sun": {
+    "value": 0.4459,
+    "lo": 0.4457,
+    "hi": 0.4462
+   },
+   "earth": {
+    "value": 1.0,
+    "lo": 1.0,
+    "hi": 1.0
+   }
+  },
+  {
+   "siteId": "a_mons_mouton_plateau",
+   "name": "Mons Mouton Plateau (MMP06)",
+   "sigmaMedianM": 0.22,
+   "errMaxDeg": 0.032,
+   "sun": {
+    "value": 0.158,
+    "lo": 0.1563,
+    "hi": 0.1588
+   },
+   "earth": {
+    "value": 0.4734,
+    "lo": 0.4728,
+    "hi": 0.4736
+   }
+  },
+  {
+   "siteId": "a_mons_mouton",
+   "name": "Mons Mouton (MMO01)",
+   "sigmaMedianM": 0.18,
+   "errMaxDeg": 0.095,
+   "sun": {
+    "value": 0.787,
+    "lo": 0.7855,
+    "hi": 0.7881
+   },
+   "earth": {
+    "value": 0.5765,
+    "lo": 0.5723,
+    "hi": 0.5804
+   }
+  },
+  {
+   "siteId": "a_nobile_rim_1",
+   "name": "Nobile Rim 1 (NR107)",
+   "sigmaMedianM": 0.25,
+   "errMaxDeg": 0.319,
+   "sun": {
+    "value": 0.5434,
+    "lo": 0.5411,
+    "hi": 0.5454
+   },
+   "earth": {
+    "value": 0.5522,
+    "lo": 0.5492,
+    "hi": 0.5547
+   }
+  },
+  {
+   "siteId": "a_nobile_rim_2",
+   "name": "Nobile Rim 2 (NR208)",
+   "sigmaMedianM": 0.3,
+   "errMaxDeg": 0.051,
+   "sun": {
+    "value": 0.3297,
+    "lo": 0.3284,
+    "hi": 0.3312
+   },
+   "earth": {
+    "value": 0.4959,
+    "lo": 0.4949,
+    "hi": 0.497
+   }
+  },
+  {
+   "siteId": "a_de_gerlache_rim_2",
+   "name": "de Gerlache Rim 2 (dGR203)",
+   "sigmaMedianM": 0.18,
+   "errMaxDeg": 0.229,
+   "sun": {
+    "value": 0.617,
+    "lo": 0.6153,
+    "hi": 0.6199
+   },
+   "earth": {
+    "value": 0.5169,
+    "lo": 0.515,
+    "hi": 0.5186
+   }
+  },
+  {
+   "siteId": "a_slater_plain",
+   "name": "Slater Plain (SP07)",
+   "sigmaMedianM": 0.18,
+   "errMaxDeg": 0.138,
+   "sun": {
+    "value": 0.5329,
+    "lo": 0.5304,
+    "hi": 0.5358
+   },
+   "earth": {
+    "value": 0.4012,
+    "lo": 0.4012,
+    "hi": 0.4012
+   }
+  },
+  {
+   "siteId": "im1_odysseus",
+   "name": "IM-1 Odysseus (Malapert A)",
+   "sigmaMedianM": 0.26,
+   "errMaxDeg": 0.565,
+   "sun": {
+    "value": 0.3266,
+    "lo": 0.3206,
+    "hi": 0.3329
+   },
+   "earth": {
+    "value": 1.0,
+    "lo": 1.0,
+    "hi": 1.0
+   }
+  },
+  {
+   "siteId": "im2_athena",
+   "name": "IM-2 Athena (Mons Mouton)",
+   "sigmaMedianM": 0.16,
+   "errMaxDeg": 0.072,
+   "sun": {
+    "value": 0.4591,
+    "lo": 0.4583,
+    "hi": 0.4599
+   },
+   "earth": {
+    "value": 0.8048,
+    "lo": 0.8048,
+    "hi": 0.8048
+   }
+  },
+  {
+   "siteId": "chandrayaan3",
+   "name": "Chandrayaan-3 Vikram (Shiv Shakti)",
+   "sigmaMedianM": 0.5,
+   "errMaxDeg": 0.08,
+   "sun": {
+    "value": 0.4703,
+    "lo": 0.4698,
+    "hi": 0.471
+   },
+   "earth": {
+    "value": 1.0,
+    "lo": 1.0,
+    "hi": 1.0
+   }
+  },
+  {
+   "siteId": "chandrayaan2_crash",
+   "name": "Chandrayaan-2 Vikram (impact)",
+   "sigmaMedianM": 0.42,
+   "errMaxDeg": 0.03,
+   "sun": {
+    "value": 0.4598,
+    "lo": 0.4598,
+    "hi": 0.4598
+   },
+   "earth": {
+    "value": 1.0,
+    "lo": 1.0,
+    "hi": 1.0
+   }
+  },
+  {
+   "siteId": "luna25_target",
+   "name": "Luna-25 target (Boguslawsky)",
+   "sigmaMedianM": 0.49,
+   "errMaxDeg": 0.049,
+   "sun": {
+    "value": 0.4456,
+    "lo": 0.4456,
+    "hi": 0.4456
+   },
+   "earth": {
+    "value": 1.0,
+    "lo": 1.0,
+    "hi": 1.0
+   }
+  },
+  {
+   "siteId": "change7_target",
+   "name": "Chang'e-7 target (Shackleton SE)",
+   "sigmaMedianM": 0.17,
+   "errMaxDeg": 0.147,
+   "sun": {
+    "value": 0.5634,
+    "lo": 0.5593,
+    "hi": 0.5672
+   },
+   "earth": {
+    "value": 0.5503,
+    "lo": 0.5503,
+    "hi": 0.5503
+   }
+  }
+ ]
+}

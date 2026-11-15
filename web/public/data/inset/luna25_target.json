@@ -1,0 +1,17 @@
+{
+ "siteId": "luna25_target",
+ "file": "luna25_target.webp",
+ "bounds": [
+  429404.1473285635,
+  451932.5804563485,
+  434404.1473285635,
+  456932.5804563485
+ ],
+ "sizePx": 512,
+ "sizeM": 5000.0,
+ "pixelM": 9.765625,
+ "resolutionM": 240,
+ "source": "LOLA 240 M",
+ "shading": "multi-directional hillshade, Sun-independent, vertical x2",
+ "layout": "row 0 = ymax (0 deg E side), col 0 = xmin; bounds in polar stereographic metres"
+}

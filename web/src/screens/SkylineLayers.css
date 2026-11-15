@@ -1,0 +1,8 @@
+/* #334: nearer terrain is lighter; the far band keeps the ground colour of the full mask. */
+.skyline-layers .skyline-mid { fill:color-mix(in srgb, var(--fg) 14%, var(--ground)); stroke:none; }
+.skyline-layers .skyline-near { fill:color-mix(in srgb, var(--fg) 30%, var(--ground)); stroke:none; }
+.skyline-legend { display:inline-flex; gap:12px; }
+.skyline-key { display:inline-block; width:10px; height:10px; margin-right:6px; vertical-align:middle; }
+.skyline-key.skyline-near { background:color-mix(in srgb, var(--fg) 30%, var(--ground)); }
+.skyline-key.skyline-mid { background:color-mix(in srgb, var(--fg) 14%, var(--ground)); }
+.skyline-key.skyline-far { background:var(--ground); outline:1px solid var(--line-strong); }

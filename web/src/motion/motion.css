@@ -1,0 +1,60 @@
+/* #126 helper nodes of the motion primitives. They exist only while a motion runs. */
+
+/* #161 interface motion tokens (UI in env.ts). Transform and opacity only; reduced motion = no motion. */
+:root { --ui-slide:220ms; --ui-menu:140ms; --ui-sheet:240ms; --ui-ease:cubic-bezier(0.215, 0.61, 0.355, 1); }
+@media (prefers-reduced-motion: reduce) { :root { --ui-slide:0ms; --ui-menu:0ms; --ui-sheet:0ms; } }
+
+/* bracketsIn: the frame's own background corners hide while four real corners (a fixed overlay over the
+   frame) snap out from its centre; shards drift off the corners. */
+.motion-bracketing { background-image:none !important; }
+.motion-brackets, .motion-frag, .motion-burst { position:fixed; z-index:17; pointer-events:none; }
+.motion-corner { position:absolute; width:var(--arm, 14px); height:var(--arm, 14px); border:0 solid var(--c, var(--fg)); }
+.motion-corner-tl { left:0; top:0; border-top-width:1px; border-left-width:1px; }
+.motion-corner-tr { right:0; top:0; border-top-width:1px; border-right-width:1px; }
+.motion-corner-bl { left:0; bottom:0; border-bottom-width:1px; border-left-width:1px; }
+.motion-corner-br { right:0; bottom:0; border-bottom-width:1px; border-right-width:1px; }
+.motion-shard { position:absolute; width:5px; height:3px; margin:-1px; background:var(--accent); clip-path:polygon(0 0, 100% 40%, 30% 100%); }
+
+/* fragmentIn: two thin stacked outlines that settle onto the panel. */
+.motion-frag i { position:absolute; display:block; }
+.motion-frag-win { inset:0; border:1px solid color-mix(in srgb, var(--fg) 45%, transparent); background:color-mix(in srgb, var(--panel) 55%, transparent); }
+
+/* dataBurst: scattered mono telemetry. */
+.motion-burst { overflow:hidden; }
+.motion-burst span { position:absolute; white-space:nowrap; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg); }
+.motion-burst span.is-dim { color:var(--muted); }
+.motion-burst span.is-red { color:var(--red); }
+.motion-burst span.is-blue { color:var(--blue); }
+
+/* ribbon: a light trail along a chart track. */
+.motion-ribbon { fill:none; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
+.motion-ribbon-sun { stroke:var(--sun); }
+.motion-ribbon-earth { stroke:var(--earth); }
+.motion-ribbon.is-tail { stroke-opacity:.35; }
+
+/* screenWipe: a starfield streak below the top bar (z 16: over the pane, under the top bar and time bar). */
+.motion-wipe { position:fixed; inset:60px 0 0; z-index:16; pointer-events:none; overflow:hidden; }
+.motion-wipe i { position:absolute; display:block; background:var(--accent); }
+.motion-wipe i.is-red { background:var(--red); }
+.motion-wipe i.is-blue { background:var(--blue); }
+
+/* sweep: the scan head on an SVG chart. */
+.motion-scan { stroke:var(--fg); stroke-width:1; pointer-events:none; }
+.motion-ghost { pointer-events:none; }
+
+/* #459 entrance: a panel's blocks rise in one after another when it opens or its content changes
+   (sheet switch, new place card). Opacity and transform only, fill backwards, so nothing stays
+   transformed after 260 ms. Reduced motion = none. */
+:root { --ui-rise:260ms; --ui-rise-ease:cubic-bezier(.2, .7, .2, 1); --ui-stagger:35ms; }
+@keyframes ui-rise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+.layer-body > *, .sched-dock > *, .lpanel > *, .place-card > *, .stepbar-label {
+  animation:ui-rise var(--ui-rise) var(--ui-rise-ease) backwards;
+}
+.layer-body > :nth-child(2), .sched-dock > :nth-child(2), .lpanel > :nth-child(2), .place-card > :nth-child(2) { animation-delay:calc(var(--ui-stagger) * 1); }
+.layer-body > :nth-child(3), .sched-dock > :nth-child(3), .lpanel > :nth-child(3), .place-card > :nth-child(3) { animation-delay:calc(var(--ui-stagger) * 2); }
+.layer-body > :nth-child(4), .sched-dock > :nth-child(4), .lpanel > :nth-child(4), .place-card > :nth-child(4) { animation-delay:calc(var(--ui-stagger) * 3); }
+.layer-body > :nth-child(5), .sched-dock > :nth-child(5), .lpanel > :nth-child(5), .place-card > :nth-child(5) { animation-delay:calc(var(--ui-stagger) * 4); }
+.layer-body > :nth-child(n+6), .sched-dock > :nth-child(n+6), .lpanel > :nth-child(n+6), .place-card > :nth-child(n+6) { animation-delay:calc(var(--ui-stagger) * 5); }
+@media (prefers-reduced-motion: reduce) {
+  .layer-body > *, .sched-dock > *, .lpanel > *, .place-card > *, .stepbar-label { animation:none !important; }
+}

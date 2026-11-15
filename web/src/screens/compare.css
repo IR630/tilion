@@ -1,0 +1,56 @@
+/* Compare screen (#95): the table is the main element; values large, the Q8 spread small and grey.
+   ".hud-screen.compare" wins over the older ".compare-…" rules in styles.css. */
+.hud-screen.compare .hud-bar { gap:8px 28px; }
+.hud-screen.compare .compare-slip { gap:0; margin:0; }
+.hud-screen.compare .compare-slip output { min-width:0; padding:0 12px; color:var(--fg); }
+.hud-screen.compare .compare-surface { gap:12px; margin:0; }
+.hud-screen.compare .compare-hint { color:var(--muted); font-size:11px; }
+
+.hud-screen.compare .compare-frame { padding:14px 16px 10px; }
+.hud-screen.compare table { width:100%; border-collapse:collapse; margin:0 0 10px; }
+.hud-screen.compare th { font-family:var(--h-mono); font-size:10.5px; font-weight:400; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); vertical-align:bottom; padding:4px 10px 8px; border-bottom:1px solid var(--h-line-strong); text-align:left; }
+.hud-screen.compare td { padding:12px 10px; border-bottom:1px solid var(--line); vertical-align:top; font-variant-numeric:tabular-nums; }
+.hud-screen.compare th:first-child, .hud-screen.compare td:first-child { padding-left:0; }
+.hud-screen.compare .cmp-site { min-width:200px; }
+.hud-screen.compare .cmp-name { display:block; font-size:14px; color:var(--fg); }
+.hud-screen.compare .cmp-meta { display:flex; flex-wrap:wrap; gap:4px 8px; margin-top:4px; font-family:var(--h-mono); font-size:10.5px; color:var(--muted); }
+.hud-screen.compare .cmp-v { display:block; font-size:20px; font-weight:300; line-height:1.2; color:var(--fg); white-space:nowrap; }
+.hud-screen.compare .cmp-none { font-size:13px; color:var(--muted); }
+.hud-screen.compare .cmp-spread { display:block; white-space:nowrap; font-family:var(--h-mono); font-size:11px; color:var(--muted); }
+.hud-screen.compare .cmp-low { display:block; max-width:120px; font-family:var(--h-mono); font-size:10.5px; line-height:1.3; color:var(--muted); }
+.hud-screen.compare .compare-best { background:none; font-weight:inherit; box-shadow:inset 0 2px 0 var(--h-blue); }
+.hud-screen.compare .compare-star { color:var(--h-blue); font-size:11px; }
+.hud-screen.compare .compare-terrain { margin:0; color:var(--muted); font-size:inherit; }
+.hud-screen.compare .compare-badge { display:inline-block; margin:0; padding:0 5px; border:1px solid var(--line); border-radius:2px; color:var(--muted); font-family:var(--h-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; }
+.hud-screen.compare .compare-badge.val-pass { color:var(--fg); border-color:var(--h-line-strong); font-weight:400; }
+.hud-screen.compare .compare-badge.val-pass::before { content:"✓ "; }
+.hud-screen.compare .compare-badge.val-fail { color:var(--h-red); border-color:var(--h-red); font-weight:400; }
+.hud-screen.compare .compare-badge.compare-mock { color:var(--h-warn); border-color:var(--h-warn); }
+
+.hud-screen.compare .compare-delta { margin-top:4px; }
+.hud-screen.compare .compare-delta caption { text-align:left; padding:0 0 6px; }
+.hud-screen.compare .compare-delta td { padding:8px 10px; font-size:15px; font-weight:300; }
+.hud-screen.compare button.compare-badge { background:none; cursor:pointer; font:inherit; font-family:var(--h-mono); font-size:10px; }
+/* #197: the table scrolls sideways inside its frame on a narrow screen; the site column stays put. */
+.hud-screen.compare .compare-scroll { overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:thin; }
+.hud-screen.compare .compare-scroll th:first-child, .hud-screen.compare .compare-scroll td:first-child { position:sticky; left:0; z-index:1; background:var(--bg); }
+/* #401: short headers (full text in the tooltip) wrap to at most 3 lines; the phone hint shows only when the table scrolls. */
+.hud-screen.compare .compare-scroll { scrollbar-color:var(--h-line-strong) transparent; }
+.hud-screen.compare .compare-scroll th { min-width:64px; }
+@media (min-width: 761px) {
+  .hud-screen.compare .compare-scroll th, .hud-screen.compare .compare-scroll td { padding-left:6px; padding-right:6px; }
+  .hud-screen.compare .compare-scroll th:first-child, .hud-screen.compare .compare-scroll td:first-child { padding-left:0; }
+  .hud-screen.compare .cmp-site { min-width:180px; }
+}
+.hud-screen.compare .compare-scroll-hint { display:none; margin:0 0 8px; }
+@media (max-width: 760px) {
+  .hud-screen.compare .compare-scroll-hint { display:block; }
+  .hud-screen.compare .cmp-site { min-width:132px; max-width:150px; }
+  .hud-screen.compare .compare-scroll th { min-width:84px; }
+  .hud-screen.compare .compare-scroll th:first-child, .hud-screen.compare .compare-scroll td:first-child { padding-right:10px; box-shadow:1px 0 0 var(--line); }
+  .hud-screen.compare .compare-frame { padding:10px 8px 8px; }
+}
+/* #363: the winner line above the table. */
+.hud-screen.compare .compare-winner { margin:0 0 16px; font-size:22px; }
+.hud-screen.compare .compare-winner-k { display:inline-block; margin-right:8px; padding:2px 8px; border:1px solid var(--fg); font-family:var(--h-mono); font-size:11px; font-weight:400; letter-spacing:.06em; text-transform:uppercase; vertical-align:4px; }
+@media (max-width: 760px) { .hud-screen.compare .compare-winner { font-size:17px; } }

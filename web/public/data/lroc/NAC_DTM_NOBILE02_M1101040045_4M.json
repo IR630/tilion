@@ -1,0 +1,67 @@
+{
+ "id": "NAC_DTM_NOBILE02_M1101040045_4M",
+ "place": "Nobile crater, NW rim",
+ "split": "dev",
+ "images": [
+  "M1101040045LC",
+  "M1101040045RC"
+ ],
+ "imageUrls": [
+  "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1012/DATA/SCI/2012244/NAC/M1101040045LC.IMG",
+  "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-3-CDR-V1.0/LROLRC_1012/DATA/SCI/2012244/NAC/M1101040045RC.IMG"
+ ],
+ "orthoUrl": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/SDP/NAC_DTM/NOBILE02/NAC_DTM_NOBILE02_M1101040045_4M.IMG",
+ "page": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/NAC_DTM_NOBILE02_M1101040045_4M",
+ "startUtc": "2012-08-31T08:12:58.577",
+ "stopUtc": "2012-08-31T08:13:34.194",
+ "midUtc": "2012-08-31T08:13:16.4",
+ "pixelM": 4.0,
+ "cellM": 20.0,
+ "bounds": [
+  87874.0,
+  122330.0,
+  95874.0,
+  130330.0
+ ],
+ "centre": {
+  "lonE": 36.0267,
+  "lat": -84.8521
+ },
+ "sun": {
+  "az": 331.896,
+  "el": 6.083,
+  "radius": 0.2633
+ },
+ "shiftM": [
+  56.0,
+  -8.0
+ ],
+ "shiftCorrelation": 0.839,
+ "cells": 88002,
+ "otsuIof": 0.01514,
+ "imageShadowPct": 45.0,
+ "modelShadowPct": 1.7,
+ "agreementPct": 56.6,
+ "shadowIou": 0.037,
+ "sphereAgreementPct": 55.0,
+ "modelShadowDarkPct": 99.8,
+ "minAgreementPct": 85.0,
+ "minIou": 0.7,
+ "pass": false,
+ "reason": "agreement 56.6 % < 85 %; shadow IoU 0.04 < 0.7",
+ "image": "NAC_DTM_NOBILE02_M1101040045_4M.webp",
+ "mask": "NAC_DTM_NOBILE02_M1101040045_4M_mask.webp",
+ "terrain": "LOLA 20 m window, 80 m, 240 m beyond (PGDA 90)",
+ "s9": {
+  "albedo": 0.1136,
+  "excludedPct": 4.3,
+  "imageShadowPct": 1.4,
+  "modelShadowPct": 1.2,
+  "agreementPct": 99.6,
+  "shadowIou": 0.731,
+  "sphereAgreementPct": 98.6,
+  "pass": true,
+  "reason": "agreement 99.6 % ≥ 85 %, shadow IoU 0.73 ≥ 0.7, bare sphere 98.6 %, left out 4.3 %",
+  "mask": "NAC_DTM_NOBILE02_M1101040045_4M_mask9.webp"
+ }
+}

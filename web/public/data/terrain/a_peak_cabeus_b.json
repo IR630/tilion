@@ -1,0 +1,16 @@
+{
+ "siteId": "a_peak_cabeus_b",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.07484762478926792,
+ "offsetM": 2165.182524973643,
+ "minM": -267.36528067756444,
+ "maxM": 4597.7303306248505,
+ "siteHeightM": 4497.539658623573,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar80"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

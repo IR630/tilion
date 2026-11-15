@@ -1,0 +1,26 @@
+/* BETA nearest cold-trap candidate (#175). Blue-grey: shadow, not water. */
+.beta-tag { display:inline-block; padding:1px 5px; border:1px solid var(--warn); color:var(--warn); font-family:var(--font-mono); font-size:9px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; line-height:1.4; vertical-align:1px; }
+
+/* Above the bottom-left HUD readout (sub-solar / sub-Earth), right of the site list. */
+.beta-psr-chip { position:absolute; z-index:6; left:calc(var(--rail-w) + 12px + 420px + 20px); bottom:calc(var(--dock-h) + 58px); display:flex; align-items:center; gap:8px; padding:4px 4px 4px 8px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); }
+.navigator.is-globe .beta-psr-chip { display:none; }
+.beta-psr-chip button { display:flex; align-items:center; gap:8px; padding:4px 8px; background:none; border:1px solid transparent; border-radius:var(--radius); color:var(--muted); font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
+.beta-psr-chip button:hover { border-color:var(--line-strong); color:var(--fg); }
+.beta-psr-chip button[aria-pressed="true"] { color:var(--fg); }
+.beta-psr-state { color:var(--dim); }
+.beta-psr-chip button[aria-pressed="true"] .beta-psr-state { color:#8fa3b8; }
+.beta-psr-swatch { width:14px; height:10px; border:1px solid #8fa3b8; background:repeating-linear-gradient(135deg, #8fa3b8 0 1px, color-mix(in srgb, #8fa3b8 12%, transparent) 1px 4px); }
+.beta-psr-chip button[aria-pressed="false"] .beta-psr-swatch { opacity:.35; }
+
+.beta-psr-card { margin:12px 0 0; padding:10px 0 0; border-top:1px solid var(--line); }
+.beta-psr-card p { margin:0; }
+.beta-psr-k { display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.beta-psr-v { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-top:4px !important; font-size:14px; color:var(--fg); font-variant-numeric:tabular-nums; }
+.beta-psr-v button { flex:none; padding:3px 8px; background:none; border:1px solid var(--line-strong); border-radius:var(--radius); color:var(--fg); font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; }
+.beta-psr-v button:hover:not(:disabled) { border-color:#8fa3b8; }
+.beta-psr-v button:disabled { color:var(--dim); cursor:not-allowed; }
+.beta-psr-src { margin-top:4px !important; font-size:11px; line-height:1.45; color:var(--muted); }
+
+@media (max-width: 760px) {
+  .beta-psr-chip { left:8px; bottom:auto; top:66px; }
+}

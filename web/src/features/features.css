@@ -1,0 +1,17 @@
+/* IAU feature names on the map (#147): small mono caps in --muted, a centre cross; no fill. */
+.iau-label { display:flex; flex-direction:column; align-items:center; gap:2px; padding:0; border:0; background:none; cursor:pointer; font-family:var(--font-mono); font-size:10px; line-height:1; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); text-shadow:0 0 3px var(--bg), 0 0 6px var(--bg); white-space:nowrap; z-index:1; }
+.iau-label i { position:relative; width:7px; height:7px; flex:none; opacity:.8; }
+.iau-label i::before, .iau-label i::after { content:""; position:absolute; background:currentColor; }
+.iau-label i::before { left:3px; top:0; width:1px; height:7px; }
+.iau-label i::after { top:3px; left:0; width:7px; height:1px; }
+.iau-label:hover, .iau-label:focus-visible { color:var(--fg); outline:none; }
+.iau-label.is-selected { color:var(--fg); z-index:3; }
+.iau-label.is-selected span { padding:1px 4px; border:1px solid var(--line-strong); background:var(--surface); text-shadow:none; }
+/* Feature card: the place card shell with two readouts. */
+.feature-facts { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0 0; padding:10px 0 0; border-top:1px solid var(--line); }
+.feature-facts div { display:flex; flex-direction:column; gap:4px; min-width:0; }
+.feature-facts dd { margin:0; font-size:15px; font-variant-numeric:tabular-nums; }
+.feature-card .place-muted.small { margin-top:12px; }
+.feature-card a { color:var(--blue); }
+/* Search results: features under the sites. */
+.nav-dot.feature-dot { width:9px; height:9px; background:none; border:1px solid var(--muted); border-radius:50%; clip-path:none; }

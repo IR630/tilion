@@ -1,0 +1,76 @@
+/* BETA printable mission brief (#326). On screen only the button shows; on paper only the sheet. */
+.mb-print-btn .beta-tag-more { display: none; }
+.mb-sheet { display: none; }
+
+@media print {
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  html:has(body > .mb-sheet), body:has(> .mb-sheet) {
+    height: auto !important;
+    overflow: visible !important;
+    color-scheme: light !important; /* the app's dark scheme paints the page margins dark */
+    background: #fff !important;
+    color: #111 !important;
+  }
+  body:has(> .mb-sheet) > :not(.mb-sheet) { display: none !important; }
+
+  .mb-sheet {
+    display: block;
+    color: #111;
+    background: #fff;
+    font: 9.5pt/1.4 var(--font-ui, "IBM Plex Sans Variable", system-ui, sans-serif);
+    font-variant-numeric: tabular-nums;
+  }
+  .mb-sheet h1 { margin: 0 0 2pt; font-size: 17pt; font-weight: 600; line-height: 1.2; }
+  .mb-sheet h2 {
+    margin: 0 0 4pt;
+    font-size: 8pt;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .mb-sheet p { margin: 0 0 3pt; }
+  .mb-head { padding-bottom: 6pt; border-bottom: 1.5pt solid #111; margin-bottom: 8pt; }
+  .mb-eyebrow { font-size: 8pt; letter-spacing: 0.08em; text-transform: uppercase; color: #555; }
+  .mb-eyebrow .beta-tag { margin-left: 4pt; }
+  .mb-sub { font-size: 10.5pt; }
+
+  .mb-sec { padding: 6pt 0; border-bottom: 0.5pt solid #bbb; break-inside: avoid; }
+  .mb-top { display: grid; grid-template-columns: 1fr 1.3fr; gap: 14pt; }
+
+  .mb-verdict { padding: 6pt 8pt; border: 1pt solid #111; border-left-width: 4pt; }
+  .mb-verdict.is-ok { border-left-color: #1b7a3a; }
+  .mb-verdict.is-marginal { border-left-color: #b07800; }
+  .mb-verdict.is-fail { border-left-color: #b3261e; }
+  .mb-verdict-line { font-size: 11pt; font-weight: 600; }
+  .mb-verdict-tag { margin-right: 4pt; letter-spacing: 0.04em; }
+  .mb-verdict, .mb-pass, .mb-fail { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .mb-kv { display: grid; grid-template-columns: max-content 1fr; gap: 1pt 10pt; margin: 0 0 4pt; }
+  .mb-kv dt { color: #555; }
+  .mb-kv dd { margin: 0; }
+
+  .mb-k { margin-top: 4pt; color: #555; font-size: 8.5pt; }
+  .mb-metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 0 0 4pt; border: 0.5pt solid #bbb; }
+  .mb-metrics div { padding: 2pt 6pt; border-left: 0.5pt solid #bbb; }
+  .mb-metrics div:first-child { border-left: 0; }
+  .mb-metrics dt { font-size: 7.5pt; color: #555; }
+  .mb-metrics dd { margin: 0; font-size: 11pt; font-weight: 600; }
+
+  .mb-table { width: 100%; border-collapse: collapse; }
+  .mb-table th, .mb-table td { padding: 2pt 6pt; border-bottom: 0.5pt solid #ddd; text-align: left; }
+  .mb-table th { font-size: 7.5pt; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.06em; }
+  .mb-pass { color: #1b7a3a; font-weight: 600; }
+  .mb-fail { color: #b3261e; font-weight: 600; }
+
+  .mb-note { font-size: 8.5pt; color: #333; }
+  .mb-muted { color: #555; }
+  .mb-warn { margin: 6pt 0 0; padding: 4pt 8pt; border: 1pt dashed #b07800; }
+  .mb-list { margin: 0; padding-left: 12pt; }
+  .mb-list li { margin: 0 0 2pt; }
+  .mb-url { font-family: var(--font-mono, monospace); font-size: 7.5pt; overflow-wrap: anywhere; word-break: break-all; }
+
+  .mb-sign { display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 16pt; padding-top: 22pt; border-bottom: 0; color: #555; font-size: 8pt; }
+  .mb-line { display: block; height: 0; margin-bottom: 3pt; border-bottom: 0.75pt solid #111; }
+  .mb-sheet .beta-tag { opacity: 1; color: #555; }
+}

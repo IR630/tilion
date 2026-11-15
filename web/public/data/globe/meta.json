@@ -1,0 +1,36 @@
+{
+ "refRadiusKm": 1737.4,
+ "color": {
+  "file": "moon_color.jpg",
+  "width": 4096,
+  "height": 2048
+ },
+ "height": {
+  "file": "moon_height.bin",
+  "width": 2048,
+  "height": 1024,
+  "scaleM": 0.5,
+  "offsetM": 0.0,
+  "minM": -8697.7,
+  "maxM": 10513.0,
+  "layout": "Int16 LE, row 0 = 90N, column 0 = 180W, pixel centres"
+ },
+ "southPatch": {
+  "file": "south_patch.bin",
+  "size": 1024,
+  "extentM": 304000.0,
+  "latEdgeDeg": -80.0,
+  "scaleM": 0.5,
+  "offsetM": 0.0,
+  "minM": -7238.7,
+  "maxM": 7007.2,
+  "layout": "Int16 LE, south polar stereographic on R = 1737.4 km, x = r sin(lonE), y = r cos(lonE); row 0 = +y, column 0 = -x, pixel centres"
+ },
+ "sources": {
+  "color": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_poles_4k.tif",
+  "height": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/ldem_16.tif",
+  "kit": "https://svs.gsfc.nasa.gov/4720",
+  "southPatch": "LDEM_80S_80MPP_ADJ.TIF, https://pgda.gsfc.nasa.gov/products/90",
+  "license": "NASA, public domain"
+ }
+}

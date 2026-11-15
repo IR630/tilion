@@ -1,0 +1,10 @@
+/* BETA hindcast (#174): compact table on the NASA check screen. */
+.beta-hindcast { margin:22px 0 0; }
+.beta-hindcast h3 { display:flex; align-items:baseline; gap:10px; margin:0 0 4px; font-size:15px; font-weight:500; }
+.beta-hindcast .beta-tag { padding:0 6px; border:1px solid var(--h-warn, currentColor); border-radius:2px; color:var(--h-warn, inherit); font-family:var(--h-mono, monospace); font-size:10.5px; font-weight:400; letter-spacing:.14em; }
+.beta-hindcast .beta-wrap { overflow-x:auto; max-width:100%; }
+.beta-hindcast table { border-collapse:collapse; width:100%; font-size:12px; font-variant-numeric:tabular-nums; }
+.beta-hindcast th { text-align:left; font-family:var(--h-mono, monospace); font-size:10.5px; font-weight:400; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); border-bottom:1px solid var(--line); padding:4px 8px 4px 0; }
+.beta-hindcast td { vertical-align:top; padding:6px 8px 6px 0; border-bottom:1px solid var(--line); }
+.beta-hindcast td small { display:block; color:var(--muted); font-size:11px; }
+.beta-hindcast .note { color:var(--muted); font-size:12px; max-width:110ch; }

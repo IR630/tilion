@@ -1,0 +1,16 @@
+{
+ "siteId": "a_de_gerlache_rim_2",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.052917914328799366,
+ "offsetM": -170.10202413366642,
+ "minM": -1889.9342398196459,
+ "maxM": 1549.730191552313,
+ "siteHeightM": 471.73879538069014,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar80"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}

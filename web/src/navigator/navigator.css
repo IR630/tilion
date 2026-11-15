@@ -1,0 +1,241 @@
+/* Navigator (#36, #72): full-bleed map under a monochrome HUD (#94 tokens only). */
+.navigator { position:absolute; inset:0; }
+.nav-map { position:absolute; inset:0; }
+.nav-map .nav-map-canvas { position:absolute; inset:0; background:var(--bg); } /* beats .maplibregl-map (its CSS loads later, lazily) */
+.nav-map-canvas .maplibregl-canvas { outline:none; }
+
+/* Site markers (#154, after FloodValue): a fixed-size dot with a 2 px dark outline, readable on any
+   basemap; grey level + shape = group, the same --shape as the site list (styles.css). A name sits
+   next to every dot that has room (MapView places it), the selected site's name is boxed.
+   Reusable as is (waypoints): button.nav-marker > span.nav-marker-dot + span.nav-marker-label;
+   colour --c, shape --shape. */
+.nav-marker { width:22px; height:22px; padding:0; border:0; background:none; cursor:pointer; }
+.nav-marker-dot { position:absolute; left:4px; top:4px; width:14px; height:14px; background:var(--bg); clip-path:var(--shape, circle(50%)); transition:transform .15s; }
+.nav-marker-dot::before { content:""; position:absolute; inset:2px; background:var(--c, var(--fg)); clip-path:var(--shape, circle(50%)); }
+.nav-dot { background:var(--c, var(--muted)); }
+.g-ridge { --c:var(--g-ridge); } .g-artemis { --c:var(--g-artemis); } .g-clps { --c:var(--g-clps); }
+.g-international { --c:var(--g-international); } .g-historic { --c:var(--g-historic); }
+.nav-marker:hover .nav-marker-dot { transform:scale(1.25); }
+.nav-marker-label { position:absolute; left:22px; top:50%; transform:translateY(-50%); white-space:nowrap; font-family:var(--font-mono); font-size:10.5px; line-height:14px; letter-spacing:.08em; text-transform:uppercase; color:var(--fg); text-shadow:0 0 2px var(--bg), 0 0 2px var(--bg), 0 0 4px var(--bg); pointer-events:none; opacity:0; }
+.nav-marker.lbl-left .nav-marker-label { left:auto; right:22px; }
+.nav-marker.lbl-on .nav-marker-label, .nav-marker:hover .nav-marker-label { opacity:1; }
+.nav-marker:hover { z-index:4; }
+/* Selected site: red fill, a red ring around the dot, the name boxed. */
+.nav-marker.is-selected { z-index:3; }
+.nav-marker.is-selected::after { content:""; position:absolute; left:-3px; top:-3px; width:28px; height:28px; box-sizing:border-box; border:2px solid var(--red); border-radius:50%; background:color-mix(in srgb, var(--red) 18%, transparent); pointer-events:none; }
+.nav-marker.is-selected .nav-marker-dot::before { background:var(--red); }
+.nav-marker.is-selected .nav-marker-label { opacity:1; left:30px; padding:0 6px; border:1px solid var(--red); background:var(--surface); text-shadow:none; }
+.nav-marker.is-selected.lbl-left .nav-marker-label { left:auto; right:30px; }
+.nav-pin { width:22px; height:22px; pointer-events:none;
+  background:
+    linear-gradient(var(--sun), var(--sun)) center / 1px 100% no-repeat, linear-gradient(var(--sun), var(--sun)) center / 100% 1px no-repeat; }
+.nav-pin::after { content:""; position:absolute; inset:7px; border:1px solid var(--sun); }
+.nav-grid-label { font-family:var(--font-mono); font-size:10px; letter-spacing:.04em; color:var(--dim); pointer-events:none; text-shadow:0 0 4px var(--bg); padding:2px 4px; }
+
+/* Route options on the map: origin, selected end, thin boxed callouts on leader lines.
+   MapLibre owns the marker element's position and transform: style only the inside. */
+.nav-route-from, .nav-route-end { width:16px; height:16px; pointer-events:none; }
+.nav-route-from i { position:absolute; inset:4px; background:var(--accent); box-shadow:0 0 0 2px var(--bg), 0 0 0 3px var(--accent); }
+.nav-route-end i { position:absolute; inset:3px; border:1px solid var(--active); box-shadow:0 0 0 2px var(--bg); }
+.nav-callout { --lead:10px; display:flex; align-items:baseline; gap:6px; padding:3px 7px; border:1px solid var(--line-strong); border-radius:0; background:var(--surface); color:var(--fg); font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; line-height:1.3; white-space:nowrap; cursor:pointer; font-variant-numeric:tabular-nums; transition:border-color .15s, color .15s; }
+.nav-callout::after { content:""; position:absolute; left:calc(50% + var(--shift, 0px)); top:100%; width:1px; height:var(--lead); background:var(--line-strong); pointer-events:none; }
+.nav-callout::before { content:""; position:absolute; left:calc(50% + var(--shift, 0px) - 2px); top:calc(100% + var(--lead) - 2px); width:5px; height:5px; border:1px solid var(--line-strong); box-sizing:border-box; pointer-events:none; }
+.nav-callout b { font-size:12px; font-weight:500; letter-spacing:.02em; }
+.nav-callout span { color:var(--muted); }
+/* #204: the rank of the option; on a score tie the slip is the deciding value, so it reads in the text colour. */
+.nav-callout i { font-style:normal; color:var(--muted); }
+.nav-callout i:empty { display:none; }
+.nav-callout.is-tie span { color:var(--fg); text-decoration:underline dotted; text-underline-offset:2px; }
+.nav-callout:hover { border-color:var(--muted); }
+.nav-callout.is-selected { border-color:var(--active); color:var(--active); z-index:6; }
+.nav-callout.is-selected b { color:var(--fg); }
+.nav-callout.is-selected span { color:var(--active); }
+.nav-callout.is-selected::after { background:var(--active); }
+.nav-callout.is-selected::before { border-color:var(--active); }
+.nav-callout.on-origin { border-style:dashed; }
+/* #397: a bubble under its anchor; the leader goes up to the point. */
+.nav-callout.is-below::after { top:auto; bottom:100%; }
+.nav-callout.is-below::before { top:auto; bottom:calc(100% + var(--lead) - 2px); }
+
+/* Left column: search pill (or route header) and the panel under it */
+.lcol { position:absolute; z-index:12; top:12px; left:calc(var(--rail-w) + 12px); width:420px; bottom:var(--dock-h); display:flex; flex-direction:column; gap:8px; pointer-events:none; }
+.lcol > * { pointer-events:auto; }
+.pill { flex:none; display:flex; align-items:center; gap:10px; height:46px; padding:0 6px 0 14px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); }
+.pill-search, .panel-search { flex:1; min-width:0; display:flex; align-items:center; gap:10px; color:var(--muted); }
+.pill-search input, .panel-search input { flex:1; min-width:0; background:none; border:0; outline:none; color:var(--fg); padding:9px 0; font-size:14px; }
+.pill-search input::placeholder, .panel-search input::placeholder { color:var(--dim); }
+.pill-search input::-webkit-search-cancel-button, .panel-search input::-webkit-search-cancel-button { display:none; }
+.pill-clear { width:30px; height:30px; display:grid; place-items:center; background:none; border:0; color:var(--muted); cursor:pointer; }
+.pill-clear:hover { color:var(--fg); }
+.panel-search { margin:0 14px 8px; padding:0 4px 0 12px; height:38px; border:1px solid var(--line); border-radius:var(--radius); background:var(--panel-2); }
+.pill:focus-within, .panel-search:focus-within { border-color:var(--line-strong); }
+.pill-route { height:auto; padding:10px 8px 10px 14px; }
+
+.lpanel { flex:0 1 auto; min-height:0; display:flex; flex-direction:column; overflow:hidden; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); animation:panel-in .18s ease-out; }
+@keyframes panel-in { from { opacity:0; transform:translateY(-4px); } }
+.lpanel-head { display:flex; align-items:baseline; justify-content:space-between; padding:14px 16px 8px; }
+.lpanel-head h2 { margin:0; font-family:var(--font-mono); font-size:11px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; color:var(--fg); }
+.lpanel-count { font-family:var(--font-mono); color:var(--muted); font-size:11px; font-variant-numeric:tabular-nums; }
+.lpanel-mission { overflow:auto; scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent; }
+.nav-list { overflow:auto; padding:0 6px 8px; scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent; }
+.nav-group h3 { display:flex; justify-content:space-between; margin:14px 10px 4px; font-family:var(--font-mono); font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+.nav-count { font-variant-numeric:tabular-nums; }
+.nav-item { display:flex; align-items:flex-start; gap:12px; width:100%; padding:8px 10px; background:none; border:0; border-left:1px solid transparent; color:var(--fg); text-align:left; cursor:pointer; transition:background-color .12s; }
+.nav-item .nav-dot { margin-top:6px; }
+.nav-item:hover { background:var(--hover); }
+.nav-item.is-selected { border-left-color:var(--sun); background:var(--hover); }
+.nav-item-text { display:flex; flex-direction:column; min-width:0; }
+.nav-item-name { font-size:13.5px; }
+.nav-item-sub { font-family:var(--font-mono); font-size:10.5px; letter-spacing:.04em; color:var(--muted); font-variant-numeric:tabular-nums; }
+.nav-chk { margin-left:auto; align-self:center; flex:none; font-family:var(--font-mono); font-size:9.5px; letter-spacing:.06em; padding:1px 5px; border:1px solid currentColor; border-radius:3px; white-space:nowrap; }
+.nav-chk.pass { color:var(--muted); }
+.nav-chk.fail { color:var(--bad); }
+.nav-empty { color:var(--muted); padding:8px 12px; }
+
+/* Place card (right) */
+.place-card { position:absolute; z-index:11; top:12px; right:12px; width:360px; max-height:calc(100% - 12px - var(--dock-h)); overflow:auto; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 16px 14px; animation:place-in .18s ease-out; scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent; }
+@keyframes place-in { from { opacity:0; transform:translateX(8px); } }
+.place-card header { position:relative; padding-right:40px; }
+.place-eyebrow { display:flex; align-items:center; gap:8px; margin:0 0 6px; font-family:var(--font-mono); font-size:10px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+.place-card h2 { margin:0; font-size:20px; line-height:1.2; font-weight:400; letter-spacing:-.01em; }
+.place-coords { margin:4px 0 0; font-family:var(--font-mono); color:var(--muted); font-size:11px; letter-spacing:.06em; font-variant-numeric:tabular-nums; }
+.place-close { position:absolute; top:-4px; right:-4px; width:30px; height:30px; display:grid; place-items:center; background:none; border:1px solid var(--line); border-radius:var(--radius); color:var(--fg); cursor:pointer; }
+.place-close:hover { border-color:var(--line-strong); background:var(--hover); }
+.place-live { margin:14px 0 0; }
+.place-tiles { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); }
+.place-tile { position:relative; display:flex; flex-direction:column; gap:2px; padding:10px 12px; font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums; border-top:2px solid transparent; }
+.place-tile + .place-tile { border-left:1px solid var(--line); }
+.place-tile b { font-size:22px; font-weight:300; color:var(--fg); margin-bottom:2px; letter-spacing:-.01em; }
+.place-tile-k { font-family:var(--font-mono); font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; }
+.place-tile.sun.on { border-top-color:var(--sun); } .place-tile.sun.on .place-tile-k { color:var(--sun); }
+.place-tile.earth.on { border-top-color:var(--earth); } .place-tile.earth.on .place-tile-k { color:var(--earth); }
+.place-actions { display:flex; flex-direction:column; gap:6px; margin:14px 0 0; }
+.place-actions-row { display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; }
+.place-actions button { display:inline-flex; align-items:center; justify-content:center; gap:7px; background:none; border:1px solid var(--line); border-radius:var(--radius); color:var(--fg); padding:8px 10px; cursor:pointer; font-size:12.5px; white-space:nowrap; transition:background-color .12s, border-color .12s; }
+.place-actions-row button { flex-direction:column; gap:5px; padding:9px 4px; font-family:var(--font-mono); font-size:9.5px; letter-spacing:.04em; text-transform:uppercase; }
+.place-actions-row button svg { color:var(--muted); }
+.place-actions button:hover:not(:disabled) { background:var(--hover); border-color:var(--line-strong); }
+.place-actions button:disabled { opacity:.35; cursor:default; }
+.place-actions .primary { background:var(--accent); border-color:var(--accent); color:var(--bg); padding:9px 14px; font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; }
+.place-actions .primary:hover:not(:disabled) { background:var(--fg); border-color:var(--fg); }
+.place-facts { display:grid; grid-template-columns:max-content 1fr; gap:6px 14px; margin:16px 0 0; padding:12px 0 0; border-top:1px solid var(--line); font-size:12.5px; }
+.place-facts dt { font-family:var(--font-mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); padding-top:2px; }
+.place-facts dd { margin:0; overflow-wrap:anywhere; }
+.place-muted { color:var(--muted); font-size:12.5px; margin:8px 0 0; }
+.place-muted.small { font-size:11px; margin-top:12px; }
+
+/* Bottom right: legend, Layers popover, Globe / map switch, zoom */
+.mapctl { position:absolute; z-index:13; right:12px; bottom:12px; display:flex; align-items:flex-end; gap:8px; }
+.mapctl-col { display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
+.fab { width:40px; height:40px; display:grid; place-items:center; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); color:var(--fg); cursor:pointer; transition:background-color .12s, color .12s, border-color .12s; }
+.fab:hover { background:var(--panel-2); border-color:var(--line-strong); }
+.fab.is-on { color:var(--active); border-color:var(--active); }
+.fab-wide { width:auto; display:inline-flex; gap:8px; padding:0 14px; font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; }
+.zoomgrp { display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); }
+.zoomgrp button { width:38px; height:36px; display:grid; place-items:center; background:none; border:0; color:var(--fg); cursor:pointer; }
+.zoomgrp button + button { border-top:1px solid var(--line); }
+.zoomgrp button:hover { background:var(--hover); }
+.layers-pop { position:absolute; right:48px; bottom:calc(100% - 40px); width:300px; padding:12px; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); animation:panel-in .15s ease-out; }
+.layers-pop-title { margin:0 0 10px; font-family:var(--font-mono); font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+.layers-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; }
+.layers-grid button { display:flex; flex-direction:column; align-items:flex-start; gap:3px; padding:5px; background:none; border:1px solid var(--line); border-radius:var(--radius); color:var(--fg); text-align:left; cursor:pointer; }
+.layers-grid button:hover { background:var(--hover); }
+.layers-grid button[aria-pressed="true"] { border-color:var(--active); }
+.layers-thumb { width:100%; height:44px; }
+.th-relief { background:radial-gradient(circle at 35% 40%, var(--g-artemis) 0 10%, var(--g-international) 30%, var(--ground) 62%); }
+.th-photo { background:radial-gradient(circle at 60% 45%, var(--bg) 0 18%, var(--muted) 40%, var(--ground) 70%); }
+.th-sun { background:linear-gradient(135deg, var(--bg), var(--ground) 35%, var(--g-clps) 75%, var(--fg)); }
+.th-thermal { background:linear-gradient(135deg, #1b0c41, #781c6d 40%, #ed6925 75%, #fcffa4); }
+.th-earth { background:linear-gradient(135deg, var(--bg), var(--ground) 35%, var(--earth) 80%); }
+.layers-name { font-family:var(--font-mono); font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; }
+.layers-sub { font-size:10.5px; color:var(--muted); line-height:1.25; }
+.nav-legend { display:grid; grid-template-columns:1fr; gap:4px; width:260px; margin-bottom:44px; padding:10px 12px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); font-size:11px; color:var(--muted); }
+.nav-legend-title { color:var(--fg); }
+.nav-legend-ramp { height:6px; }
+.nav-legend-ticks { display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:10px; font-variant-numeric:tabular-nums; }
+.nav-legend-src { font-size:10px; }
+.nav-legend-kticks { position:relative; height:12px; font-family:var(--font-mono); font-size:10px; font-variant-numeric:tabular-nums; }
+.nav-legend-kticks span { position:absolute; transform:translateX(-50%); white-space:nowrap; }
+.nav-legend-kticks span:first-child { transform:none; }
+.nav-legend-kticks span:last-child { transform:translateX(-100%); }
+.nav-scale { position:absolute; z-index:5; right:64px; bottom:20px; }
+.nav-scale-bar { height:14px; border:1px solid var(--muted); border-top:0; color:var(--fg); font-family:var(--font-mono); font-size:10px; text-align:center; line-height:12px; letter-spacing:.06em; font-variant-numeric:tabular-nums; text-shadow:0 0 3px var(--bg); }
+.nav-scale-note { margin-top:2px; color:var(--muted); font-family:var(--font-mono); font-size:9px; letter-spacing:.04em; white-space:nowrap; text-shadow:0 0 3px var(--bg); }
+.nav-scale-note[hidden] { display:none; }
+.nav-attrib { position:absolute; z-index:5; right:64px; bottom:calc(var(--dock-h) - 4px); text-align:right; margin:0; font-family:var(--font-mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); pointer-events:none; }
+.nav-note { position:absolute; z-index:10; top:16px; left:50%; transform:translateX(-50%); margin:0; padding:6px 12px; font-size:12px; color:var(--warn); background:var(--surface); border:1px solid var(--warn); border-radius:var(--radius); }
+
+/* HUD: viewport corner brackets, corner readouts, static film grain */
+/* The free area of the map (right of the rail, above the time strip): layout only, not drawn (#155). */
+.vp-frame { position:absolute; z-index:4; inset:6px 6px var(--dock-h) calc(var(--rail-w) + 6px); pointer-events:none; }
+.hud-corner { position:absolute; z-index:6; margin:0; font-family:var(--font-mono); font-size:10.5px; line-height:1.55; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); pointer-events:none; font-variant-numeric:tabular-nums; text-shadow:0 0 4px var(--bg); white-space:pre; }
+.hud-corner b { color:var(--fg); font-weight:500; }
+.hud-corner .sun { color:var(--sun); } .hud-corner .earth { color:var(--earth); }
+.hud-bl { bottom:calc(var(--dock-h) + 14px); left:calc(var(--rail-w) + 12px + 420px + 20px); }
+
+@media (max-width: 760px) {
+  /* #197: the search stays on top; the Sites and Mission panels are a bottom sheet. */
+  .lcol { left:8px; right:8px; width:auto; bottom:8px; }
+  .lcol > .lpanel { margin-top:auto; max-height:62%; border-radius:10px 10px var(--radius) var(--radius); }
+  .place-card { top:auto; bottom:12px; left:8px; right:8px; width:auto; max-height:55%; z-index:14; }
+  /* #310: an open site list (a new search) goes over the place card, or only Enter can pick a result. */
+  .lcol.has-list { z-index:15; }
+  /* #402, #403: one bottom panel at a time on a phone. The Mission panel hides the place card;
+     an open left panel hides the map controls (pinch zooms the map). */
+  .navigator:has(.lpanel-mission) .place-card, .navigator:has(.lcol > .lpanel) .mapctl { display:none; }
+  /* #403: the route header fits the pill (the site name gets an ellipsis, the date and the close
+     button stay in view); the collapsed calendar button does not cover the mode chips. */
+  .pill-route .route-head { flex:1; min-width:0; }
+  .lcol:has(> .pill-route) .mcal:not(.is-open) { display:none; }
+  .navigator:has(.pill-route) .mapctl { top:106px; }
+  .mapctl { bottom:auto; top:66px; right:8px; }
+  .nav-legend, .hud-corner, .vp-frame { display:none; }
+  .layers-pop { right:48px; bottom:auto; top:0; width:260px; }
+  .nav-scale, .nav-attrib { display:none; }
+}
+@media (max-width: 1180px) { .hud-bl { display:none; } }
+@media (prefers-reduced-motion: reduce) { .nav-callout, .nav-item, .place-actions button, .nav-marker-dot { transition:none; } }
+
+/* #158 map shell: the base-view switch (Globe | Map) in both modes, and the left column slot. */
+.viewsw { display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); }
+.viewsw button { display:flex; flex-direction:column; align-items:center; gap:3px; width:52px; padding:7px 0 5px; background:none; border:0; border-radius:0; color:var(--muted); font-family:var(--font-mono); font-size:9px; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; transition:color .15s, background-color .15s; }
+.viewsw button + button { border-top:1px solid var(--line); }
+.viewsw button:hover { color:var(--fg); background:var(--hover); }
+.viewsw button[aria-pressed="true"] { color:var(--fg); box-shadow:inset 2px 0 0 var(--active); }
+/* #465: globe <-> map by zoom only. The switch stays for the keyboard and screen readers, shown on focus. */
+.viewsw:not(:focus-within) { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.lslot { min-height:0; flex:0 1 auto; overflow:auto; }
+/* An open place card owns the right edge: the map controls move to its left. */
+.navigator.has-card .mapctl { right:calc(12px + 360px + 12px); }
+@media (max-width: 760px) { .navigator.has-card .mapctl { right:8px; } }
+/* #271: the site's own NASA check rows on the place card. */
+.evi { margin:12px 0 0; padding:10px 0 0; border-top:1px solid var(--line); }
+.evi-k { margin:0 0 6px; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+.evi ul { margin:0; padding:0; list-style:none; display:grid; gap:6px; }
+.evi-row { display:flex; gap:8px; align-items:baseline; font-size:12.5px; color:var(--fg); }
+.evi-row b { flex:none; padding:0 5px; border:1px solid currentColor; border-radius:var(--radius); font-family:var(--font-mono); font-size:10.5px; font-weight:400; letter-spacing:.04em; }
+.evi-row.pass b { color:var(--ok); }
+.evi-row.fail b { color:var(--bad); }
+.evi-row.info b { color:var(--muted); }
+.evi-row a { color:inherit; }
+/* #282: date-slip table on the place card. */
+.slip { margin:12px 0 0; padding:10px 0 0; border-top:1px solid var(--line); }
+.slip-k { margin:0 0 6px; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+.slip table { width:100%; border-collapse:collapse; font-size:12px; font-variant-numeric:tabular-nums; }
+.slip th, .slip td { padding:3px 2px; text-align:right; font-weight:400; }
+.slip tbody th { text-align:left; color:var(--muted); white-space:nowrap; }
+.slip thead button { padding:2px 4px; border:1px solid var(--line); border-radius:var(--radius); background:none; color:var(--fg); font-family:var(--font-mono); font-size:10.5px; cursor:pointer; }
+.slip thead button:hover { border-color:var(--line-strong); }
+.slip .best { color:var(--sun); }
+.slip thead .best button { border-color:var(--sun); color:var(--sun); }
+
+.sphere-comparison { margin:12px 0; padding:10px; border:1px solid var(--line); }
+.sphere-comparison > button { width:100%; }
+.sphere-comparison p { color:var(--dim); font-size:11px; line-height:1.4; margin:8px 0; }
+.sphere-band { margin:8px 0; }
+.sphere-band-row { display:flex; align-items:center; gap:8px; margin:3px 0; font-size:11px; }
+.sphere-band-row span { width:82px; flex:none; }
+.sphere-band-row svg { flex:1; min-width:0; height:10px; }
+.sphere-band-off { fill:var(--line); }
+.sphere-band.k-sun .sphere-band-on { fill:#e7b85d; }
+.sphere-band.k-earth .sphere-band-on { fill:#72b9dc; }

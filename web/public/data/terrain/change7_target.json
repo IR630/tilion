@@ -1,0 +1,16 @@
+{
+ "siteId": "change7_target",
+ "size": 256,
+ "spacingM": 80.0,
+ "scaleM": 0.04990389441477779,
+ "offsetM": 25.540005022310652,
+ "minM": -1596.3365634579677,
+ "maxM": 1647.416573502589,
+ "siteHeightM": 1631.7890309352078,
+ "layout": "row-major Int16 LE; row 0 = north edge, col 0 = west edge; site at the centre",
+ "heights": "metres above the local tangent plane at the site (curvature applied)",
+ "dem": [
+  "polar80"
+ ],
+ "source": "LOLA LDEM_80S_80MPP_ADJ / LDEM_60S_240MPP_ADJ (PGDA)"
+}
